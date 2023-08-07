@@ -1,0 +1,166 @@
+.App {
+  text-align: center;
+  background: #1a1f28;
+  height: 100vh;
+
+  .game-bar {
+    margin-top: -75px;
+    display: flex;
+    height: 75px;
+
+    .wrapper__button {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #696f78;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 20, 25, 0.7) 0%,
+        rgba(15, 20, 25, 0.87) 100%
+      );
+      box-shadow: -1px -1px 0px 0px rgba(50, 59, 74, 0.51) inset;
+
+      &.active {
+        color: #fff;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 212, 135, 0.25) 0%,
+          rgba(14, 122, 108, 0) 50%
+        );
+        box-shadow: 0px -2px 0px 0px #03a36c inset;
+      }
+
+      &:hover {
+        color: #fff;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 212, 135, 0.25) 0%,
+          rgba(14, 122, 108, 0) 50%
+        );
+        box-shadow: 0px -2px 0px 0px #03a36c inset;
+      }
+    }
+  }
+
+  .table-head {
+    line-height: 1.5;
+    text-align: left;
+    font-weight: 400;
+    -webkit-text-size-adjust: none;
+    font-family: Play, sans-serif;
+    user-select: none;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 28px;
+    margin-top: 20px;
+    padding: 0 20px;
+    font-size: 12px;
+    color: rgba(127, 133, 143, 1);
+    background: #11161c;
+    border-radius: 8px 8px 0 0;
+    text-transform: uppercase;
+
+    .table-row_left {
+      min-width: 136px;
+      width: 136px;
+      display: flex;
+
+      .table-head__date {
+        width: 72px;
+      }
+      .table-head__game {
+        width: 64px;
+        text-align: center;
+      }
+    }
+
+    .table-row_center {
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
+      position: relative;
+
+      .select {
+        width: 19.22%;
+      }
+      .teamLeft {
+        padding-right: 100px;
+        text-align: right;
+        width: 40.39%;
+      }
+      .draw {
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        left: 59.61%;
+        margin-left: -60px;
+        position: absolute;
+        top: 0;
+        width: 90px;
+      }
+
+      .teamRight {
+        padding-left: 65px;
+        width: 40.39%;
+      }
+    }
+    .table-row_right {
+      display: flex;
+      width: 30px;
+      justify-content: flex-end;
+      min-width: 30px;
+      max-width: 30px;
+      padding: 0;
+    }
+  }
+  .table-content {
+    display: flex;
+    flex-direction: column;
+
+    .match {
+      display: flex;
+      position: relative;
+      width: 100%;
+      border-bottom: 0 none;
+      flex-wrap: nowrap;
+      height: 72px;
+      padding: 20px;
+      background: #11161c;
+      align-items: center;
+      transition: 0.3s;
+      font-size: 13px;
+      box-shadow: 0 1px inset rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(0, 0, 0, 0.5);
+
+      .match-header {
+        background: transparent;
+        padding: 0;
+        width: 136px;
+        border-right: 0 none;
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        position: relative;
+      }
+      .match-body {
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-grow: 1;
+        flex-wrap: nowrap;
+        width: calc(95% - 200px);
+        text-align: left;
+        padding-bottom: 0;
+        overflow: hidden;
+      }
+    }
+  }
+}

@@ -1,24 +1,83 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+import "./libs/reset.scss";
+import Header from "./Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="swiper">
+        <img src="../img/slide.png" alt="slide" />
+      </div>
+      <div className="game-bar container">
+        <div className="wrapper__button active">
+          <span>ALL</span>
+          <span>GAMES</span>
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/csgo.png" alt="csgo" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/dota2.png" alt="dota2" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/lol.png" alt="lol" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/rain.png" alt="rain" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/call.png" alt="call" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/overwatch.png" alt="overwatch" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/starcraft.png" alt="starcraft" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/nba.png" alt="nba" />
+        </div>
+        <div className="wrapper__button">
+          <img src="../img/rocket.png" alt="rocket" />
+        </div>
+        <div className="wrapper__button">
+          <span>MORE</span>
+          <span>GAMES</span>
+        </div>
+      </div>
+      <div className="table-container container">
+        <div className="table-head">
+          <div className="table-row_left">
+            <span className=" table-head__date">Date</span>
+            <span className=" table-head__game">Game</span>
+          </div>
+          <div className="table-row_center">
+            <div className="select">
+              <span className="table-head__market">Select</span>
+            </div>
+            <div className="teamLeft">
+              <span>1</span>
+            </div>
+            <div className="draw">
+              <span className="table-head__draw">Draw</span>
+            </div>
+            <div className="teamRight">
+              <span>2</span>
+            </div>
+          </div>
+          <div className="table-row_right">
+            <span className="table-head__more">More</span>
+          </div>
+        </div>
+        <div className="table-content">
+          <div className="match">
+            <div className="match-header"></div>
+            <div className="match-body"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,107 @@
+.header {
+  align-items: center;
+  background: #0f1419;
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav__left {
+      margin-left: 20px;
+      display: flex;
+
+      .nav__item {
+        display: flex;
+
+        .link {
+          color: #ebeaea;
+          font-family: Segoe UI;
+          font-size: 17px;
+          font-weight: 700;
+          line-height: normal;
+          text-transform: uppercase;
+          padding: 19px 23.52px 20px 20px;
+          transition: 0.4s;
+
+          &.active {
+            color: #00d487;
+            background: linear-gradient(
+              0deg,
+              rgba(0, 212, 135, 0.25) 0%,
+              rgba(14, 122, 108, 0) 50%
+            );
+            box-shadow: 0px -2px 0px 0px #03a36c inset;
+          }
+          &:hover {
+            color: #00d487;
+            background: linear-gradient(
+              0deg,
+              rgba(0, 212, 135, 0.25) 0%,
+              rgba(14, 122, 108, 0) 50%
+            );
+            box-shadow: 0px -2px 0px 0px #03a36c inset;
+          }
+        }
+      }
+    }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-left: 2px solid #9f9f9f80;
+      padding-left: 12px;
+
+      .balance__wrapper {
+        display: flex;
+        cursor: pointer;
+
+        .balance {
+          display: flex;
+          flex-direction: column;
+          margin-right: 5px;
+          align-items: flex-start;
+
+          .balance__main {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: #00d487;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+          .balance__bonus {
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: bold;
+            color: #9f9f9f;
+          }
+        }
+      }
+
+      .button {
+        color: rgb(255 255 255 / 90%);
+        font-family: Segoe UI;
+        font-size: 14px;
+        font-weight: 700;
+        background: linear-gradient(to top, #0d966e 0%, #09b177 100%);
+        padding: 9px 16px;
+        border-radius: 8px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 4px #00d487, inset 0 0 3px 1px #00d487;
+          color: #fff;
+          background: linear-gradient(180deg, #0ec184 0%, #0ba072 100%);
+        }
+      }
+
+      .user {
+        display: flex;
+        cursor: pointer;
+      }
+    }
+  }
+}
