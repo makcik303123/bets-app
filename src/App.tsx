@@ -73,8 +73,30 @@ function App() {
         </div>
         <div className="table-content">
           <div className="match">
-            <div className="match-header"></div>
-            <div className="match-body"></div>
+            <div className="match-header">
+              <div>333</div>
+              <div className="test">
+                <img src="../img/valorant.webp" alt="valorant" />
+              </div>
+            </div>
+            <div className="match-body">
+              <div className="select">
+                position: relative; align-items: center;
+              </div>
+              <div className="teamLeft">
+                position: relative; align-items: center;
+              </div>
+              <div className="draw">1:2</div>
+              <div className="teamRight">
+                position: relative; align-items: center;
+              </div>
+            </div>
+            <div className="match-more">
+              <button className="more-btn">
+                <span>23</span>
+                <img width={15} height={15} src="../img/down.svg" alt="down" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
