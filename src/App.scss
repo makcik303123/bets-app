@@ -124,8 +124,11 @@
   .table-content {
     display: flex;
     flex-direction: column;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
 
     .match {
+      color: #7f858f;
       display: flex;
       position: relative;
       width: 100%;
@@ -150,7 +153,25 @@
         align-items: center;
         height: 32px;
         position: relative;
-        .test {
+
+        .match-date {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          font-family: Play, sans-serif;
+          font-size: 12px;
+          line-height: 12px;
+
+          .date-time {
+            margin-bottom: 2px;
+            font-weight: 700;
+          }
+          .date-day {
+            text-transform: uppercase;
+            font-weight: 400;
+          }
+        }
+        .match-game {
           width: 64px;
           height: 64px;
           display: flex;
@@ -173,12 +194,30 @@
 
         .select {
           width: 19.22%;
+          display: flex;
+          flex-direction: column;
+
+          .select-event {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 15.988px;
+            margin-bottom: 1.5px;
+          }
+          .select-tournament {
+            color: rgba(127, 133, 143, 0.8);
+            font-size: 11px;
+            line-height: 14px;
+            white-space: nowrap;
+          }
         }
+
         .teamLeft {
-          padding-right: 100px;
+          padding-right: 52px;
           text-align: right;
           width: 40.39%;
+          justify-content: flex-end;
         }
+
         .draw {
           display: flex;
           position: absolute;
@@ -195,8 +234,43 @@
           color: rgba(127, 133, 143, 1);
         }
 
+        .team {
+          display: flex;
+          justify-content: flex-end;
+          gap: 12px;
+          color: #fff;
+          font-family: Play, sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          align-items: center;
+
+          .team-name {
+            line-height: 15.4px;
+          }
+
+          // .team-logo {
+          // }
+
+          .team-btn {
+            text-align: center;
+            line-height: 14px;
+            display: flex;
+            width: 80px;
+            height: 32px;
+            padding: 7.77px 25.97px 10.23px 26.03px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            background: linear-gradient(0deg, #222a31 0%, #29323a 100%);
+            box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.05) inset,
+              0px 4px 10px -2px rgba(0, 0, 0, 0.15),
+              0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+          }
+        }
         .teamRight {
-          padding-left: 65px;
+          flex-direction: row-reverse;
+          padding-left: 40px;
           width: 40.39%;
         }
       }
@@ -207,7 +281,32 @@
         align-items: center;
 
         .more-btn {
-          padding: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .more-counter {
+            color: #7f858f;
+            font-family: Play, sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 21px;
+            margin-right: 7.23px;
+          }
+
+          .more-down {
+            border-radius: 6px;
+            background: linear-gradient(0deg, #222a31 0%, #29323a 100%);
+            box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.05) inset,
+              0px 4px 10px -2px rgba(0, 0, 0, 0.15),
+              0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
     }
