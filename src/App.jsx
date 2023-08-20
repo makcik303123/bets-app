@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "./App.scss";
 import "./libs/reset.scss";
 import Header from "./components/Header";
@@ -46,6 +47,25 @@ function App() {
       teamRightLogo: "../img/team-logo-1.png",
     },
   ];
+
+  const token = "t1-nL1LW0jKw8qtGtYaNBzEb7J7lQ_x-zKRIcvW64yYqknM7zhQ";
+
+  const instance = axios.create({
+    baseURL: "https://api.pandascore.co",
+    headers: { Authorization: "Bearer " + token },
+  });
+
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const gamesResponce = await instance.get("/dota2/matches/upcoming");
+        console.log(gamesResponce.data);
+      } catch (error) {
+        alert("Error");
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
