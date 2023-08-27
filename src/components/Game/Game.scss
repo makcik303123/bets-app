@@ -119,8 +119,12 @@
         line-height: 15.4px;
       }
 
-      // .team-logo {
-      // }
+      .team-logo {
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
       .team-btn {
         text-align: center;
@@ -148,7 +152,7 @@
     }
     .teamRight {
       flex-direction: row-reverse;
-      padding-left: 40px;
+      padding-left: 52px;
       width: 40.39%;
     }
   }
@@ -184,6 +188,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      &:hover {
+        .more-down {
+          // box-shadow: 0 0 4px #00d487, inset 0 0 3px 1px #00d487;
+          color: #fff;
+          // background: linear-gradient(180deg, #0ec184 0%, #0ba072 100%);
+          opacity: 0.5;
+        }
+
+        .more-counter {
+          color: #ffffffa5;
+        }
       }
     }
   }
