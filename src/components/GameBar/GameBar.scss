@@ -1,0 +1,44 @@
+.game-bar {
+	margin-top: -75px;
+	display: flex;
+	height: 75px;
+
+	.wrapper__button {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		color: #696f78;
+		font-size: 14px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: 0.3s;
+		background: linear-gradient(
+			180deg,
+			rgba(15, 20, 25, 0.7) 0%,
+			rgba(15, 20, 25, 0.87) 100%
+		);
+		box-shadow: -1px -1px 0px 0px rgba(50, 59, 74, 0.51) inset;
+
+		&.active {
+			color: #fff;
+			background: linear-gradient(
+				0deg,
+				rgba(0, 212, 135, 0.25) 0%,
+				rgba(14, 122, 108, 0) 50%
+			);
+			box-shadow: 0px -2px 0px 0px #03a36c inset;
+		}
+
+		&:hover {
+			color: #fff;
+			background: linear-gradient(
+				0deg,
+				rgba(0, 212, 135, 0.25) 0%,
+				rgba(14, 122, 108, 0) 50%
+			);
+			box-shadow: 0px -2px 0px 0px #03a36c inset;
+		}
+	}
+}

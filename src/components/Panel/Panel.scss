@@ -1,0 +1,85 @@
+.table-head {
+	line-height: 1.5;
+	text-align: left;
+	font-weight: 400;
+	-webkit-text-size-adjust: none;
+	font-family: Play, sans-serif;
+	user-select: none;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 28px;
+	margin-top: 20px;
+	padding: 0 20px;
+	font-size: 12px;
+	color: rgba(127, 133, 143, 1);
+	background: #11161c;
+	border-radius: 8px 8px 0 0;
+	text-transform: uppercase;
+
+	.table-row_left {
+		min-width: 136px;
+		width: 136px;
+		display: flex;
+
+		.table-head__date {
+			width: 72px;
+		}
+		.table-head__game {
+			width: 64px;
+			text-align: center;
+		}
+	}
+
+	.table-row_center {
+		display: flex;
+		justify-content: space-between;
+		flex-grow: 1;
+		position: relative;
+
+		.select {
+			width: 19.22%;
+		}
+		.teamLeft {
+			padding-right: 100px;
+			text-align: right;
+			width: 40.39%;
+		}
+		.draw {
+			height: 32px;
+			display: flex;
+			justify-content: center;
+			left: 59.61%;
+			margin-left: -60px;
+			position: absolute;
+			top: 0;
+			width: 90px;
+		}
+
+		.teamRight {
+			padding-left: 65px;
+			width: 40.39%;
+		}
+	}
+	.table-row_right {
+		display: flex;
+		width: 30px;
+		justify-content: flex-end;
+		min-width: 30px;
+		max-width: 30px;
+		padding: 0;
+	}
+}
+.table-content {
+	display: flex;
+	flex-direction: column;
+	border-radius: 0 0 8px 8px;
+	max-height: 504px;
+	overflow: hidden;
+}
+
+.thumb-vertical {
+	background: linear-gradient(0deg, #222a31 0%, #29323a 100%);
+	border-radius: 5px;
+}

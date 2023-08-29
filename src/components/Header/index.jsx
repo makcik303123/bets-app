@@ -1,7 +1,7 @@
 import React from "react";
 import "./header.scss";
-import Link from "../Link";
 import Login from "../Login";
+import { Link } from "react-router-dom";
 
 function Header() {
 	const arrayLinks = [
@@ -34,13 +34,15 @@ function Header() {
 				<div className="nav container">
 					<img src="../img/logo.svg" alt="logo" />
 					<ul className="nav__left">
-						{arrayLinks.map((link, index) => (
-							<Link
-								setActiveLink={setActiveLink}
-								indexLink={index}
-								name={link}
-								activeLink={activeLink}
-							/>
+						{arrayLinks.map((link, i) => (
+							<li className="nav__item" onClick={() => setActiveLink(i)}>
+								<Link
+									to={"/" + link}
+									className={i === activeLink ? "active link" : "link"}
+								>
+									{link}
+								</Link>
+							</li>
 						))}
 						;
 					</ul>
