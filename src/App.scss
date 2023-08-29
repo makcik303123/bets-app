@@ -1,8 +1,114 @@
 .App {
-	text-align: center;
-	background: #1a1f28;
-	min-height: 100vh;
-	position: relative;
-	overflow: hidden;
-	width: 100%;
+  text-align: center;
+  background: #1a1f28;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.news {
+  font-family: Play, sans-serif;
+
+  .news-content-container {
+    padding: 0 10px;
+
+    .news-content {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+
+      .content-block-wrapper {
+        margin: 0 16px 32px;
+        width: calc(25% - 32px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        overflow: hidden;
+
+        @media (max-width: 1200px) {
+          width: calc(33% - 32px);
+        }
+        @media (max-width: 992px) {
+          width: calc(50% - 32px);
+        }
+        @media (max-width: 768px) {
+          width: calc(100% - 32px);
+        }
+
+        .content-block {
+          position: relative;
+          width: 100%;
+          position: relative;
+          background-color: #12171d;
+          transition: background-color 0.3s linear;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #0a0d10;
+
+            .title-selectable {
+              color: #1cd487;
+            }
+          }
+
+          .block-img {
+            width: 100%;
+            img {
+              width: 100%;
+            }
+          }
+          .block-info {
+            text-align: start;
+            color: #fff;
+            position: relative;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 160px;
+
+            .info-title {
+              margin-bottom: 15px;
+
+              .title-selectable {
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 1.125;
+                transition: color 0.3s linear;
+                margin-bottom: 0;
+                word-break: break-word;
+              }
+              .title-preview {
+                font-size: 12px;
+                line-height: 15px;
+                font-weight: 700;
+                opacity: 0.5;
+                margin-top: 5px;
+                margin-bottom: 0;
+                word-break: break-word;
+              }
+            }
+            .info-footer {
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+              font-size: 12px;
+              padding-bottom: 8px;
+
+              .info-data {
+                opacity: 0.5;
+              }
+            }
+            .block-logo-game {
+              position: absolute;
+              top: -16px;
+              left: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
