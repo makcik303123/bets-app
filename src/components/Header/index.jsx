@@ -21,7 +21,7 @@ function Header() {
   ];
 
   const [activeLink, setActiveLink] = React.useState(0);
-  const [autorization, setAutorization] = React.useState(false);
+  const [autorization, setAutorization] = React.useState(true);
   const [selectValue, setSelectValue] = React.useState(false);
   const [activeValue, setactiveValue] = React.useState(1);
   const [popupLogin, setPopupLogin] = React.useState(false);
