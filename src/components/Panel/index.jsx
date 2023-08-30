@@ -3,7 +3,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import Game from "../Game";
 import "./Panel.scss";
 
-function Panel({ dataGames }) {
+function Panel({ dataGames, isLoading }) {
 	return (
 		<div className="table-container container">
 			<div className="table-head">
@@ -40,9 +40,22 @@ function Panel({ dataGames }) {
 						<div {...props} className="thumb-vertical" />
 					)}
 				>
-					{dataGames.map((dataGame) => (
-						<Game dataGame={dataGame} />
-					))}
+					{isLoading ? (
+						<div class="lds-ring">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<p>Loading...</p>
+						</div>
+					) : dataGames[0] ? (
+						dataGames.map((dataGame) => <Game dataGame={dataGame} />)
+					) : (
+						<div className="content-not-found">
+							<span>Upcomming mathes not found.</span>
+							<span>Please select any videogame</span>
+						</div>
+					)}
 				</Scrollbars>
 			</div>
 		</div>

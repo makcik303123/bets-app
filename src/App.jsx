@@ -15,9 +15,10 @@ function App() {
 			<Header />
 
 			<Routes>
-				<Route exact path="/" element={<Bets />} />
+				<Route exact path="/bets" element={<Bets />} />
 				<Route exact path="/news" element={<News />} />
 				<Route exact path="/promo" element={<Promo />} />
+				<Route exact path="/" element={<Bets />} />
 			</Routes>
 		</div>
 	);
