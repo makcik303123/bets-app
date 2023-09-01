@@ -2,6 +2,7 @@ import React from "react";
 import "./header.scss";
 import Login from "../Login";
 import { Link } from "react-router-dom";
+import SignIn from "../SignIn";
 
 function Header() {
   const arrayLinks = [
@@ -21,14 +22,16 @@ function Header() {
   ];
 
   const [activeLink, setActiveLink] = React.useState(0);
-  const [autorization, setAutorization] = React.useState(true);
+  const [autorization, setAutorization] = React.useState(false);
   const [selectValue, setSelectValue] = React.useState(false);
   const [activeValue, setactiveValue] = React.useState(1);
   const [popupLogin, setPopupLogin] = React.useState(false);
+  const [popupSignIn, setPopupSignIn] = React.useState(false);
 
   return (
     <div>
       <Login popupLogin={popupLogin} setPopupLogin={setPopupLogin} />
+      <SignIn popupSignIn={popupSignIn} setPopupSignIn={setPopupSignIn} />
 
       <header className="header">
         <div className="nav container">
@@ -112,7 +115,9 @@ function Header() {
                 <button onClick={() => setPopupLogin(true)} className="button">
                   Login
                 </button>
-                <button className="button">Sign Up</button>
+                <button onClick={() => setPopupSignIn(true)} className="button">
+                  Sign Up
+                </button>
               </>
             )}
           </div>
