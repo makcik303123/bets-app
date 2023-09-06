@@ -12,12 +12,12 @@ function Bets() {
     "cs-go",
     "dota-2",
     "league-of-legends",
-    "rain",
-    "call",
+    "lol-wild-rift",
+    "r6-siege",
     "ow",
     "starcraft-2",
     "rl",
-    "nba",
+    "call",
     ["MORE", "GAMES"],
   ];
 

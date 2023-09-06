@@ -3,8 +3,13 @@ import "./header.scss";
 import Login from "../Login";
 import { Link } from "react-router-dom";
 import SignIn from "../SignIn";
+import { useSelector, useDispatch } from "react-redux";
+import { changeAuth } from "../../redux/slices/authSlice";
 
 function Header() {
+  const authorization = useSelector((state) => state.authReducer.value);
+  const dispatch = useDispatch();
+
   const arrayLinks = [
     "bets",
     "pro",
@@ -16,13 +21,12 @@ function Header() {
   ];
   let balance = 300;
   const arrayValues = [
-    { value: "USD", balance: balance * 1.1 },
-    { value: "RUB", balance: balance * 100 },
-    { value: "EUR", balance: balance },
+    { value: "USD", multiplayer: 1.1 },
+    { value: "RUB", multiplayer: 100 },
+    { value: "EUR", multiplayer: 1 },
   ];
 
   const [activeLink, setActiveLink] = React.useState(0);
-  const [autorization, setAutorization] = React.useState(false);
   const [selectValue, setSelectValue] = React.useState(false);
   const [activeValue, setactiveValue] = React.useState(1);
   const [popupLogin, setPopupLogin] = React.useState(false);
@@ -50,7 +54,7 @@ function Header() {
             ;
           </ul>
           <div className="nav__right">
-            {autorization ? (
+            {authorization ? (
               <>
                 <div className="balance__container">
                   <div
@@ -63,7 +67,7 @@ function Header() {
                           {arrayValues[activeValue].value}
                         </div>
                         <div className="main__amount">
-                          {arrayValues[activeValue].balance}
+                          {arrayValues[activeValue].multiplayer * balance}
                         </div>
                       </div>
                       <div className="balance__bonus">Bonus: 0.00</div>
@@ -77,7 +81,9 @@ function Header() {
                               className="select__row"
                             >
                               <div className="row__value">{value.value}</div>
-                              <div className="row__result">{value.balance}</div>
+                              <div className="row__result">
+                                {value.multiplayer * balance}
+                              </div>
                             </div>
                           ))}
                         </div>
