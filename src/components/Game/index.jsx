@@ -18,7 +18,12 @@ function Game({ dataGame }) {
 				<div className="match-game">
 					{/* {dataGame.videogame.slug} */}
 					{/* {dataGame.videogame.id} */}
-					<img src={`img/${dataGame.videogame.slug}.webp`} alt="valorant" />
+					<img
+						width={22}
+						height={22}
+						src={`img/${dataGame.videogame.slug}.webp`}
+						alt={dataGame.videogame.slug}
+					/>
 				</div>
 			</div>
 
