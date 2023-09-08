@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+} from "firebase/auth";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -13,7 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 function create(email, password) {
 	createUserWithEmailAndPassword(auth, email, password)
@@ -31,7 +36,7 @@ function create(email, password) {
 			// ..
 		});
 }
-
+// signin("asd", "asd");
 function signin(email, password) {
 	signInWithEmailAndPassword(auth, email, password)
 		.then((userCredential) => {
@@ -41,6 +46,7 @@ function signin(email, password) {
 			// ...
 		})
 		.catch((error) => {
+			console.log(error);
 			const errorCode = error.code;
 			const errorMessage = error.message;
 		});

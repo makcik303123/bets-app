@@ -1,136 +1,143 @@
 .header {
-  align-items: center;
-  background: #1a1f28;
+	align-items: center;
+	background: #1a1f28;
 
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	.nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-    .nav__left {
-      margin-left: 20px;
-      display: flex;
+		.nav__left {
+			margin-left: 20px;
+			display: flex;
 
-      .nav__item {
-        display: flex;
+			.nav__item {
+				display: flex;
 
-        .link {
-          color: #ebeaea;
-          font-family: Segoe UI;
-          font-size: 17px;
-          font-weight: 700;
-          line-height: normal;
-          text-transform: uppercase;
-          padding: 19px 23.52px 20px 20px;
-          transition: 0.4s;
+				.link {
+					color: #ebeaea;
+					font-family: Segoe UI;
+					font-size: 17px;
+					font-weight: 700;
+					line-height: normal;
+					text-transform: uppercase;
+					padding: 19px 23.52px 20px 20px;
+					transition: 0.4s;
 
-          &.active {
-            color: #00d487;
-            background: linear-gradient(
-              0deg,
-              rgba(0, 212, 135, 0.25) 0%,
-              rgba(14, 122, 108, 0) 50%
-            );
-            box-shadow: 0px -2px 0px 0px #03a36c inset;
-          }
-          &:hover {
-            color: #00d487;
-            background: linear-gradient(
-              0deg,
-              rgba(0, 212, 135, 0.25) 0%,
-              rgba(14, 122, 108, 0) 50%
-            );
-            box-shadow: 0px -2px 0px 0px #03a36c inset;
-          }
-        }
-      }
-    }
+					&.active {
+						color: #00d487;
+						background: linear-gradient(
+							0deg,
+							rgba(0, 212, 135, 0.25) 0%,
+							rgba(14, 122, 108, 0) 50%
+						);
+						box-shadow: 0px -2px 0px 0px #03a36c inset;
+					}
+					&:hover {
+						color: #00d487;
+						background: linear-gradient(
+							0deg,
+							rgba(0, 212, 135, 0.25) 0%,
+							rgba(14, 122, 108, 0) 50%
+						);
+						box-shadow: 0px -2px 0px 0px #03a36c inset;
+					}
+				}
+			}
+		}
 
-    .nav__right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border-left: 2px solid #9f9f9f80;
-      padding-left: 12px;
+		.nav__right {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			border-left: 2px solid #9f9f9f80;
+			padding-left: 12px;
 
-      .balance__container {
-        display: flex;
-        cursor: pointer;
-        position: relative;
+			.balance__container {
+				display: flex;
+				cursor: pointer;
+				position: relative;
 
-        .balance__wrapper {
-          display: flex;
-          cursor: pointer;
-          .balance {
-            display: flex;
-            flex-direction: column;
-            margin-right: 5px;
-            align-items: flex-start;
+				.balance__wrapper {
+					display: flex;
+					cursor: pointer;
+					.balance {
+						display: flex;
+						flex-direction: column;
+						margin-right: 5px;
+						align-items: flex-start;
 
-            .balance__main {
-              display: flex;
-              justify-content: space-between;
-              width: 126px;
-              color: #00d487;
-              font-weight: bold;
-              margin-bottom: 5px;
-            }
-            .balance__bonus {
-              white-space: nowrap;
-              font-size: 14px;
-              font-weight: bold;
-              color: #9f9f9f;
-            }
-          }
-          img {
-            transition: 0.2s;
-            &.active {
-              transform: rotate(180deg);
-            }
-          }
-        }
-        .balance__select-wrapper {
-          cursor: initial;
-          position: absolute;
-          // width: 100%;
-          left: -12px;
-          right: 0;
-          top: 100%;
-          padding-top: 5px;
-          // height: fit-content;
-          .balance__select {
-            background-color: #9f9f9f;
-            padding-left: -12px;
-            border-radius: 5px;
-            padding: 6px 12px;
-            display: flex;
-            position: relative;
-            flex-direction: column;
+						.balance__main {
+							display: flex;
+							justify-content: space-between;
+							width: 126px;
+							color: #00d487;
+							font-weight: bold;
+							margin-bottom: 5px;
+						}
+						.balance__bonus {
+							white-space: nowrap;
+							font-size: 14px;
+							font-weight: bold;
+							color: #9f9f9f;
+						}
+					}
+					img {
+						transition: 0.2s;
+						&.active {
+							transform: rotate(180deg);
+						}
+					}
+				}
+				.balance__select-wrapper {
+					cursor: initial;
+					position: absolute;
+					z-index: 1;
+					left: -12px;
+					right: 0;
+					top: 100%;
+					padding-top: 12px;
 
-            .select__row {
-              cursor: pointer;
-              display: flex;
-              justify-content: space-between;
-              padding-bottom: 6px;
-              border-bottom: 1px solid #ebeaea;
-              transition: 0.2s;
+					.balance__select {
+						background-color: #303338;
+						padding-left: -12px;
+						border-radius: 5px;
+						padding: 6px 12px;
+						color: #c5d4cf;
+						font-weight: bold;
+						font-size: 14px;
+						display: flex;
+						position: relative;
+						flex-direction: column;
 
-              &:hover {
-                background: linear-gradient(
-                  0deg,
-                  rgba(0, 212, 135, 0.25) 0%,
-                  rgba(14, 122, 108, 0) 50%
-                );
-              }
-            }
-          }
-        }
-      }
+						.select__row {
+							cursor: pointer;
+							display: flex;
+							justify-content: space-between;
+							padding-top: 3px;
+							padding-bottom: 6px;
+							border-bottom: 1px solid #ebeaea;
+							transition: 0.3s;
 
-      .user {
-        display: flex;
-        cursor: pointer;
-      }
-    }
-  }
+							&:hover {
+								color: #00d487;
+								background: linear-gradient(
+									0deg,
+									rgba(0, 212, 135, 0.25) 0%,
+									rgba(14, 122, 108, 0) 50%
+								);
+								// box-shadow: 0px -2px 0px 0px #03a36c inset;
+								border-color: #03a36c;
+							}
+						}
+					}
+				}
+			}
+
+			.user {
+				display: flex;
+				cursor: pointer;
+			}
+		}
+	}
 }

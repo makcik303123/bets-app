@@ -3,21 +3,23 @@ import "./Game.scss";
 
 function Game({ dataGame }) {
 	const multiplayer = 1.85;
-
+	const { status } = dataGame;
 	return (
 		<div className="match">
 			<div className="match-header">
 				<div className="match-date">
 					<span className="date-time">
-						{dataGame?.begin_at?.slice(-9, -4) || "Upcom"}
+						{status === "running"
+							? "LIVE"
+							: dataGame?.begin_at?.slice(-9, -4) || "Upcom"}
 					</span>
 					<span className="date-day">
-						{dataGame?.begin_at?.slice(5, 10) || "Soon"}
+						{status === "running"
+							? ""
+							: dataGame?.begin_at?.slice(5, 10) || "Soon"}
 					</span>
 				</div>
 				<div className="match-game">
-					{/* {dataGame.videogame.slug} */}
-					{/* {dataGame.videogame.id} */}
 					<img
 						width={22}
 						height={22}

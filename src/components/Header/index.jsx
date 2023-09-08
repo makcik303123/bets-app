@@ -11,6 +11,7 @@ function Header() {
 	const authorization = useSelector((state) => state.authReducer.value);
 	const activeValue = useSelector((state) => state.activeValueRducer.value);
 	const dispatch = useDispatch();
+	const selectRef = React.useRef();
 
 	const arrayLinks = [
 		"bets",
@@ -32,6 +33,16 @@ function Header() {
 	const [selectValue, setSelectValue] = React.useState(false);
 	const [popupLogin, setPopupLogin] = React.useState(false);
 	const [popupSignIn, setPopupSignIn] = React.useState(false);
+
+	React.useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (!e.composedPath().includes(selectRef.current)) {
+				setSelectValue(false);
+			}
+		};
+		document.body.addEventListener("click", handleClickOutside);
+		return () => document.body.removeEventListener("click", handleClickOutside);
+	}, []);
 
 	return (
 		<div>
@@ -61,6 +72,7 @@ function Header() {
 									<div
 										onClick={() => setSelectValue(!selectValue)}
 										className="balance__wrapper"
+										ref={selectRef}
 									>
 										<div className="balance">
 											<div className="balance__main">
@@ -101,7 +113,7 @@ function Header() {
 										/>
 									</div>
 								</div>
-								<button className="button">+&nbsp;ДЕПОЗИТ</button>
+								<button className="button">+&nbsp;DEPOSIT</button>
 								<div className="user">
 									<img
 										width={35}
