@@ -2,16 +2,42 @@ import React from "react";
 import "./header.scss";
 import Login from "../Login";
 import { Link } from "react-router-dom";
-import SignIn from "../SignIn";
+import SignUp from "../SignUp";
 import { useSelector, useDispatch } from "react-redux";
-// import { changeAuth } from "../../redux/slices/authSlice";
+import { changeAuth } from "../../redux/slices/authSlice";
 import { changeActiveValue } from "../../redux/slices/activeValueSlice";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function Header() {
 	const authorization = useSelector((state) => state.authReducer.value);
 	const activeValue = useSelector((state) => state.activeValueRducer.value);
 	const dispatch = useDispatch();
 	const selectRef = React.useRef();
+
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			// User is signed in, see docs for a list of available properties
+			// https://firebase.google.com/docs/reference/js/auth.user
+			const uid = user.uid;
+			console.log(user);
+			// ...
+		} else {
+			console.log("sign out");
+			// User is signed out
+			// ...
+		}
+	});
+
+	const signOutFromAccount = () => {
+		signOut(auth)
+			.then(() => {
+				dispatch(changeAuth());
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 
 	const arrayLinks = [
 		"bets",
@@ -32,7 +58,7 @@ function Header() {
 	const [activeLink, setActiveLink] = React.useState(0);
 	const [selectValue, setSelectValue] = React.useState(false);
 	const [popupLogin, setPopupLogin] = React.useState(false);
-	const [popupSignIn, setPopupSignIn] = React.useState(false);
+	const [popupSignUp, setPopupSignUp] = React.useState(false);
 
 	React.useEffect(() => {
 		const handleClickOutside = (e) => {
@@ -47,7 +73,7 @@ function Header() {
 	return (
 		<div>
 			<Login popupLogin={popupLogin} setPopupLogin={setPopupLogin} />
-			<SignIn popupSignIn={popupSignIn} setPopupSignIn={setPopupSignIn} />
+			<SignUp popupSignUp={popupSignUp} setPopupSignUp={setPopupSignUp} />
 
 			<header className="header">
 				<div className="nav container">
@@ -114,7 +140,7 @@ function Header() {
 									</div>
 								</div>
 								<button className="button">+&nbsp;DEPOSIT</button>
-								<div className="user">
+								<div className="user" onClick={() => signOutFromAccount()}>
 									<img
 										width={35}
 										height={35}
@@ -134,7 +160,7 @@ function Header() {
 								<button onClick={() => setPopupLogin(true)} className="button">
 									Login
 								</button>
-								<button onClick={() => setPopupSignIn(true)} className="button">
+								<button onClick={() => setPopupSignUp(true)} className="button">
 									Sign Up
 								</button>
 							</>

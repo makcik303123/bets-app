@@ -1,10 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	onAuthStateChanged,
-} from "firebase/auth";
+import { getDatabase, set, ref } from "firebase/database";
+
+const database = getDatabase();
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -20,46 +18,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-function create(email, password) {
-	createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			console.log(userCredential);
-			const user = userCredential.user;
-			// ...
-		})
-		.catch((error) => {
-			console.log(error);
-			console.log(auth);
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
-		});
-}
-// signin("asd", "asd");
-function signin(email, password) {
-	signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const user = userCredential.user;
-
-			// ...
-		})
-		.catch((error) => {
-			console.log(error);
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+export function writeUserData(userId, name, email) {
+	const db = getDatabase();
+	set(ref(db, "users/" + userId), {
+		username: name,
+		email: email,
+		balance: 100,
+	});
 }
 
-onAuthStateChanged(auth, (user) => {
-	if (user) {
-		// User is signed in, see docs for a list of available properties
-		// https://firebase.google.com/docs/reference/js/auth.user
-		const uid = user.uid;
-		// ...
-	} else {
-		// User is signed out
-		// ...
-	}
-});
+// writeUserData(231242154715721, "makcim", "asdada@dsad.ru");
+// function create(email, password) {
+// 	createUserWithEmailAndPassword(auth, email, password)
+// 		.then((userCredential) => {
+// 			// Signed in
+// 			console.log(userCredential);
+// 			const user = userCredential.user;
+// 			// ...
+// 		})
+// 		.catch((error) => {
+// 			console.log(error);
+// 			console.log(auth);
+// 			const errorCode = error.code;
+// 			const errorMessage = error.message;
+// 			// ..
+// 		});
+// }
+// // signin("asd", "asd");
+
+// onAuthStateChanged(auth, (user) => {
+// 	if (user) {
+// 		// User is signed in, see docs for a list of available properties
+// 		// https://firebase.google.com/docs/reference/js/auth.user
+// 		const uid = user.uid;
+// 		// ...
+// 	} else {
+// 		// User is signed out
+// 		// ...
+// 	}
+// });
