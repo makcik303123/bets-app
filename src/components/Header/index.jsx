@@ -15,30 +15,26 @@ function Header() {
 	const dispatch = useDispatch();
 	const selectRef = React.useRef();
 
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-			// User is signed in, see docs for a list of available properties
-			// https://firebase.google.com/docs/reference/js/auth.user
-			const uid = user.uid;
-			console.log(user);
-			// ...
-		} else {
-			console.log("sign out");
-			// User is signed out
-			// ...
-		}
-	});
+	// onAuthStateChanged(auth, (user) => {
+	// 	if (user) {
+	// 		const uid = user.uid;
+	// 		console.log(user);
+	// 		// dispatch(changeAuth(true));
+	// 	} else {
+	// 		console.log("sign out");
+	// 	}
+	// });
 
-	const signOutFromAccount = () => {
-		signOut(auth)
-			.then(() => {
-				dispatch(changeAuth());
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-
+	// const signOutFromAccount = () => {
+	// 	signOut(auth)
+	// 		.then(() => {
+	// 			dispatch(changeAuth());
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 		});
+	// };
+	// signOutFromAccount();
 	const arrayLinks = [
 		"bets",
 		"pro",
@@ -140,7 +136,7 @@ function Header() {
 									</div>
 								</div>
 								<button className="button">+&nbsp;DEPOSIT</button>
-								<div className="user" onClick={() => signOutFromAccount()}>
+								<div className="user">
 									<img
 										width={35}
 										height={35}

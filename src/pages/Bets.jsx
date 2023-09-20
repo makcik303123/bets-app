@@ -2,7 +2,6 @@ import React from "react";
 import { instance } from "../api/api";
 import GameBar from "../components/GameBar";
 import Panel from "../components/Panel";
-import { writeUserData } from "../firebase";
 
 function Bets() {
 	const [dataGames, setDataGames] = React.useState([]);
@@ -47,7 +46,6 @@ function Bets() {
 			}
 		}
 		fetchData();
-		writeUserData(231242154715721, "makcim", "asdada@dsad.ru");
 	}, [filter]);
 
 	console.log(dataGames);

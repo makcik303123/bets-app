@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeAuth } from "../../redux/slices/authSlice";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addUserInDatabase } from "../../firebase";
 
 const SignUp = ({ popupSignUp, setPopupSignUp }) => {
 	const dispatch = useDispatch();
@@ -21,9 +22,8 @@ const SignUp = ({ popupSignUp, setPopupSignUp }) => {
 				// Signed in
 				const user = userCredential.user;
 				console.log(user);
-
+				addUserInDatabase(user.uid, email, password, Date.now());
 				dispatch(changeAuth());
-				console.log("You clicked sign Up");
 				setPopupSignUp(false);
 			})
 			.catch((error) => {

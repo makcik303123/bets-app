@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, set, ref } from "firebase/database";
-
-const database = getDatabase();
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -17,17 +16,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const db = getFirestore(app);
 
-export function writeUserData(userId, name, email) {
-	const db = getDatabase();
-	set(ref(db, "users/" + userId), {
-		username: name,
+const usersRef = collection(db, "users");
+console.log(auth);
+export async function addUserInDatabase(uid, email, password, createTime) {
+	await setDoc(doc(usersRef, uid), {
 		email: email,
-		balance: 100,
+		password: password,
+		createTime: createTime,
+		balance: 150,
+		listBets: [],
 	});
 }
-
-// writeUserData(231242154715721, "makcim", "asdada@dsad.ru");
+// export { addUserInDatabase, auth };
 // function create(email, password) {
 // 	createUserWithEmailAndPassword(auth, email, password)
 // 		.then((userCredential) => {
