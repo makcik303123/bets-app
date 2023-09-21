@@ -2,21 +2,21 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import {
-	collection,
-	addDoc,
-	setDoc,
-	doc,
-	onSnapshot,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  onSnapshot,
 } from "firebase/firestore";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
-	authDomain: "app-bets-6502e.firebaseapp.com",
-	projectId: "app-bets-6502e",
-	storageBucket: "app-bets-6502e.appspot.com",
-	messagingSenderId: "293430886720",
-	appId: "1:293430886720:web:6ec83e40f8edf7a5bc3aa5",
-	measurementId: "G-QLKB97PDXM",
+  apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
+  authDomain: "app-bets-6502e.firebaseapp.com",
+  projectId: "app-bets-6502e",
+  storageBucket: "app-bets-6502e.appspot.com",
+  messagingSenderId: "293430886720",
+  appId: "1:293430886720:web:6ec83e40f8edf7a5bc3aa5",
+  measurementId: "G-QLKB97PDXM",
 };
 
 // Initialize Firebase
@@ -25,50 +25,20 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const usersRef = collection(db, "users");
-console.log(auth);
 
 async function addUserInDatabase(uid, email, password, createTime) {
-	await setDoc(doc(usersRef, uid), {
-		email: email,
-		password: password,
-		createTime: createTime,
-		balance: 150,
-		listBets: [],
-	});
+  await setDoc(doc(usersRef, uid), {
+    email: email,
+    password: password,
+    createTime: createTime,
+    balance: 150,
+    listBets: [],
+  });
 }
 
 function test(uid) {
-	const unsub = onSnapshot(doc(usersRef, uid), (doc) => {
-		console.log("Current data: ", doc.data());
-	});
+  const unsub = onSnapshot(doc(usersRef, uid), (doc) => {
+    console.log("Current data: ", doc.data());
+  });
 }
 export { addUserInDatabase, auth, test };
-// function create(email, password) {
-// 	createUserWithEmailAndPassword(auth, email, password)
-// 		.then((userCredential) => {
-// 			// Signed in
-// 			console.log(userCredential);
-// 			const user = userCredential.user;
-// 			// ...
-// 		})
-// 		.catch((error) => {
-// 			console.log(error);
-// 			console.log(auth);
-// 			const errorCode = error.code;
-// 			const errorMessage = error.message;
-// 			// ..
-// 		});
-// }
-// // signin("asd", "asd");
-
-// onAuthStateChanged(auth, (user) => {
-// 	if (user) {
-// 		// User is signed in, see docs for a list of available properties
-// 		// https://firebase.google.com/docs/reference/js/auth.user
-// 		const uid = user.uid;
-// 		// ...
-// 	} else {
-// 		// User is signed out
-// 		// ...
-// 	}
-// });
