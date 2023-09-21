@@ -23,7 +23,6 @@ const SignUp = ({ popupSignUp, setPopupSignUp }) => {
 				const user = userCredential.user;
 				console.log(user);
 				addUserInDatabase(user.uid, email, password, Date.now());
-				dispatch(changeAuth());
 				setPopupSignUp(false);
 			})
 			.catch((error) => {

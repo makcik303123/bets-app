@@ -1,7 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import {
+	collection,
+	addDoc,
+	setDoc,
+	doc,
+	onSnapshot,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -15,12 +21,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
 const usersRef = collection(db, "users");
 console.log(auth);
-export async function addUserInDatabase(uid, email, password, createTime) {
+
+async function addUserInDatabase(uid, email, password, createTime) {
 	await setDoc(doc(usersRef, uid), {
 		email: email,
 		password: password,
@@ -29,7 +36,13 @@ export async function addUserInDatabase(uid, email, password, createTime) {
 		listBets: [],
 	});
 }
-// export { addUserInDatabase, auth };
+
+function test(uid) {
+	const unsub = onSnapshot(doc(usersRef, uid), (doc) => {
+		console.log("Current data: ", doc.data());
+	});
+}
+export { addUserInDatabase, auth, test };
 // function create(email, password) {
 // 	createUserWithEmailAndPassword(auth, email, password)
 // 		.then((userCredential) => {

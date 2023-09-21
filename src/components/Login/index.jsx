@@ -15,7 +15,6 @@ const Login = ({ popupLogin, setPopupLogin }) => {
 			.then((userCredential) => {
 				// Signed in
 				const user = userCredential.user;
-				dispatch(changeAuth());
 				console.log("You clicked submit.");
 				setPopupLogin(false);
 			})
@@ -23,8 +22,8 @@ const Login = ({ popupLogin, setPopupLogin }) => {
 				console.log(error);
 				const errorCode = error.code;
 				const errorMessage = error.message;
-				console.log(error.code);
-				console.log(error.message);
+				console.log(errorCode);
+				console.log(errorMessage);
 			});
 	}
 
@@ -56,7 +55,7 @@ const Login = ({ popupLogin, setPopupLogin }) => {
 						/>
 						<label htmlFor="">password</label>
 					</div>
-					<button href="" type="submit">
+					<button type="submit">
 						<span></span>
 						<span></span>
 						<span></span>
