@@ -1,13 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, setDoc, doc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -32,13 +26,11 @@ async function addUserInDatabase(uid, email, password, createTime) {
     password: password,
     createTime: createTime,
     balance: 150,
+    status: true,
+    bonus: 0,
     listBets: [],
+    activeValue: 1,
   });
 }
 
-function test(uid) {
-  const unsub = onSnapshot(doc(usersRef, uid), (doc) => {
-    console.log("Current data: ", doc.data());
-  });
-}
-export { addUserInDatabase, auth, test };
+export { addUserInDatabase, auth, usersRef };

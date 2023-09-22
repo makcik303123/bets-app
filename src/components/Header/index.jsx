@@ -1,19 +1,23 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import "./header.scss";
 import Login from "../Login";
 import { Link } from "react-router-dom";
 import SignUp from "../SignUp";
-import { useSelector, useDispatch } from "react-redux";
-import { changeAuth } from "../../redux/slices/authSlice";
-import { getUserData } from "../../redux/slices/userSlice";
+
+import { changeUserData } from "../../redux/slices/userSlice";
 import { changeActiveValue } from "../../redux/slices/activeValueSlice";
+import { changeAuthUid } from "../../redux/slices/authUidSlice";
+
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, test } from "../../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { auth, usersRef } from "../../firebase";
 
 function Header() {
-  const authorization = useSelector((state) => state.authReducer.value);
   const activeValue = useSelector((state) => state.activeValueRducer.value);
   const userData = useSelector((state) => state.getUserDataReducer.data);
+  const authUid = useSelector((state) => state.authUidReducer.value);
   const dispatch = useDispatch();
   const selectRef = React.useRef();
 
@@ -21,24 +25,31 @@ function Header() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(user);
-        dispatch(getUserData([uid, user.email]));
-        // Будем вызывать в файрбейзе и заполнять юсера
-        // dispatch(changeAuth(true));
-        // console.log(userData);
-        test(uid);
+        // console.log(user);
+        dispatch(changeAuthUid(uid));
       } else {
-        console.log("sign out");
-        dispatch(getUserData({}));
-        // dispatch(changeAuth(false));
+        dispatch(changeAuthUid(undefined));
       }
     });
   }, []);
 
+  React.useEffect(() => {
+    if (authUid) {
+      const unsub = onSnapshot(doc(usersRef, authUid), (doc) => {
+        dispatch(changeUserData(doc.data()));
+        console.log("Current data: ", doc.data());
+      });
+      console.log(userData);
+      return unsub;
+    } else {
+      dispatch(changeUserData({}));
+    }
+  }, [authUid]);
+
   const signOutFromAccount = () => {
     signOut(auth)
       .then(() => {
-        dispatch(changeAuth(false));
+        dispatch(changeUserData({}));
       })
       .catch((error) => {
         console.log(error);
@@ -55,7 +66,6 @@ function Header() {
     "news",
   ];
 
-  let balance = 300;
   const arrayValues = [
     { value: "USD", multiplayer: 1.1 },
     { value: "RUB", multiplayer: 100 },
@@ -77,6 +87,8 @@ function Header() {
     return () => document.body.removeEventListener("click", handleClickOutside);
   }, []);
 
+  const { balance } = userData;
+
   return (
     <div>
       <Login popupLogin={popupLogin} setPopupLogin={setPopupLogin} />
@@ -87,7 +99,11 @@ function Header() {
           <img width={69} height={30} src="../img/logo.svg" alt="logo" />
           <ul className="nav__left">
             {arrayLinks.map((link, i) => (
-              <li className="nav__item" onClick={() => setActiveLink(i)}>
+              <li
+                className="nav__item"
+                onClick={() => setActiveLink(i)}
+                key={i}
+              >
                 <Link
                   to={"/" + link}
                   className={i === activeLink ? "active link" : "link"}
@@ -99,7 +115,7 @@ function Header() {
             ;
           </ul>
           <div className="nav__right">
-            {userData?.uid ? (
+            {userData.status ? (
               <>
                 <div className="balance__container">
                   <div
