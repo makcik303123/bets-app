@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { apiKey } from "../api/api";
+import BlockNews from "../components/news";
 
 function News() {
-	const [news, setNews] = React.useState([]);
+	const [listNews, setListNews] = React.useState([]);
 
 	React.useEffect(() => {
 		async function fetchDataNews() {
@@ -11,7 +12,7 @@ function News() {
 				const newsResponce = await axios.get(
 					`https://newsdata.io/api/1/news?apikey=${apiKey}&q=esport&language=en`
 				);
-				setNews(newsResponce.data.results);
+				setListNews(newsResponce.data.results);
 			} catch (error) {
 				alert("Error");
 			}
@@ -19,7 +20,8 @@ function News() {
 		fetchDataNews();
 	}, []);
 
-	console.log(news);
+	console.log(listNews);
+
 	const tags = [
 		"all news",
 		"dota 2",
@@ -69,39 +71,8 @@ function News() {
 			</div>
 			<div className="news-content-container">
 				<div className="news-content">
-					{news.map((n) => (
-						<div className="content-block-wrapper">
-							<div className="content-block">
-								<div className="block-img">
-									<img src="img/img-news.jpg" alt="img-news" />
-								</div>
-								<div className="block-info">
-									<div className="info-title">
-										<div className="title-selectable">
-											{n.title.slice(0, 50)}
-											{n.title.length > 50 ? "..." : ""}
-										</div>
-										<div className="title-preview">
-											{n.description.slice(0, 50)}...
-										</div>
-									</div>
-									<div className="info-footer">
-										<div className="info-data">
-											{n.pubDate
-												.split(" ")[0]
-												.split("-")
-												.reverse()
-												.toSpliced(1, 1)
-												.join(" ")}{" "}
-											года
-										</div>
-									</div>
-									<div className="block-logo-game">
-										<img src="img/dota2-news.png" alt="dota2-news" />
-									</div>
-								</div>
-							</div>
-						</div>
+					{listNews.map((n) => (
+						<BlockNews data={n} />
 					))}
 				</div>
 			</div>
