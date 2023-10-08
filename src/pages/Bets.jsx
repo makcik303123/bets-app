@@ -2,11 +2,13 @@ import React from "react";
 import { instance } from "../api/api";
 import GameBar from "../components/GameBar";
 import Panel from "../components/Panel";
+import BetSlip from "../components/BetSlip";
 
 function Bets() {
   const [dataGames, setDataGames] = React.useState([]);
   const [activeVideoGame, setActiveVideoGame] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
+
   const arrVideoGames = [
     ["ALL", "GAMES"],
     "cs-go",
@@ -71,8 +73,18 @@ function Bets() {
         <div className="helper">
           <div className="switcher">
             {buttons.map((button, i) => (
-              <button className="switcher-button active">{button}</button>
+              <button
+                onClick={() => setActiveButton(i)}
+                className={
+                  "switcher-button" + (activeButton === i ? " active" : "")
+                }
+              >
+                {button}
+              </button>
             ))}
+          </div>
+          <div className="content">
+            <BetSlip />
           </div>
         </div>
       </div>

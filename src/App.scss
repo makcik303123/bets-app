@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  color: #fff;
 }
 
 .news {
@@ -199,6 +200,10 @@
       display: none;
     }
     .helper {
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #11161c;
+
       .switcher {
         display: flex;
         flex-wrap: nowrap;
@@ -238,7 +243,7 @@
             transition: opacity 0.3s;
           }
           &.active {
-            color: rgb(0 212 135);
+            color: rgb(0 212 135) !important;
             &::before {
               opacity: 1;
             }
@@ -250,6 +255,12 @@
             margin: 0 0 0 auto;
           }
         }
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
       }
     }
   }

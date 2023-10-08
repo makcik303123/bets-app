@@ -1,0 +1,158 @@
+.bet-slip {
+  display: flex;
+  flex-direction: column;
+
+  .bet-slip__head {
+    padding: 12px 12px 0;
+    display: flex;
+    flex-direction: column;
+
+    .head__wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+
+      .head__switcher {
+        display: flex;
+        padding: 1px;
+        background-color: #0e1116;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        box-shadow: 0 1px rgba(255, 255, 255, 0.05);
+
+        .switcher__btn {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+          color: rgb(127 133 143);
+          font-size: 14px;
+          line-height: 1;
+          font-weight: 700;
+          padding: 6px 10px;
+          text-transform: uppercase;
+          border: 1px solid transparent;
+          transition: 0.3s;
+          background: transparent;
+          height: 100%;
+
+          &:hover {
+            color: rgb(255 255 255 / 90%);
+          }
+
+          &.active {
+            border: 1px solid rgb(0 212 135 / 50%);
+            color: rgb(255 255 255 / 90%);
+            filter: drop-shadow(0px 0px 8px rgb(0 212 135 / 50%));
+          }
+        }
+      }
+
+      .head__close {
+        color: #7f858f;
+        transition: color 0.3s;
+        cursor: pointer;
+        &:hover {
+          color: rgb(217 63 63);
+        }
+      }
+    }
+
+    .auto-accept {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      align-items: center;
+
+      .auto-accept__btn {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .btn__description {
+          font-size: 12px;
+          color: rgb(255 255 255 / 80%);
+          margin-bottom: 0;
+          white-space: nowrap;
+          user-select: none;
+        }
+        .btn__checked {
+          flex-shrink: 0;
+          position: relative;
+          width: 16px;
+          height: 16px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+          border-radius: 4px;
+          background-color: var(--text-dark-color-50);
+          margin-right: 12px;
+          margin-left: 2px;
+          cursor: pointer;
+
+          &.active {
+            background-color: var(--primary-loot-color-100);
+
+            &::before {
+              opacity: 1;
+            }
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 8px;
+            top: 50%;
+            left: 50%;
+            margin-top: -1px;
+            border: solid var(--text-color-100);
+            border-width: 0 2px 2px 0;
+            transform: translate(-50%, -50%) rotate(-315deg);
+            transition: 0.3s;
+            opacity: 0;
+          }
+        }
+      }
+      .auto-accept__info {
+        width: 16px;
+        height: 16px;
+        fill: rgb(127 133 143);
+        transition: fill 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          fill: rgb(0 212 135);
+        }
+      }
+    }
+  }
+
+  .bet-slip__content {
+    // padding: 0 12px;
+    height: 60vh;
+  }
+
+  .bet-slip__footer {
+    padding: 12px;
+
+    .button {
+      width: 100%;
+      text-transform: uppercase;
+      padding: 12px 0;
+      font-size: 16px;
+      display: flex;
+      transition: 0.3s;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  .view {
+    padding: 0 12px;
+  }
+
+  .thumb-vertical {
+    padding: 10px 0;
+  }
+}
