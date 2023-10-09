@@ -4,9 +4,9 @@ import activeValueRducer from "./slices/activeValueSlice";
 import getUserDataReducer from "./slices/userSlice";
 
 export default configureStore({
-  reducer: {
-    authUidReducer,
-    activeValueRducer,
-    getUserDataReducer,
-  },
+	reducer: {
+		authUidReducer,
+		activeValueRducer,
+		getUserDataReducer,
+	},
 });
