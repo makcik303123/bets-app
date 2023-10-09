@@ -1,65 +1,36 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	onAuthStateChanged,
-} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { collection, setDoc, doc } from "firebase/firestore";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
-	authDomain: "app-bets-6502e.firebaseapp.com",
-	projectId: "app-bets-6502e",
-	storageBucket: "app-bets-6502e.appspot.com",
-	messagingSenderId: "293430886720",
-	appId: "1:293430886720:web:6ec83e40f8edf7a5bc3aa5",
-	measurementId: "G-QLKB97PDXM",
+  apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
+  authDomain: "app-bets-6502e.firebaseapp.com",
+  projectId: "app-bets-6502e",
+  storageBucket: "app-bets-6502e.appspot.com",
+  messagingSenderId: "293430886720",
+  appId: "1:293430886720:web:6ec83e40f8edf7a5bc3aa5",
+  measurementId: "G-QLKB97PDXM",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-function create(email, password) {
-	createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			console.log(userCredential);
-			const user = userCredential.user;
-			// ...
-		})
-		.catch((error) => {
-			console.log(error);
-			console.log(auth);
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
-		});
-}
-// signin("asd", "asd");
-function signin(email, password) {
-	signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const user = userCredential.user;
+const usersRef = collection(db, "users");
 
-			// ...
-		})
-		.catch((error) => {
-			console.log(error);
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+async function addUserInDatabase(uid, email, password, createTime) {
+  await setDoc(doc(usersRef, uid), {
+    email: email,
+    password: password,
+    createTime: createTime,
+    balance: 150,
+    status: true,
+    bonus: 0,
+    listBets: [],
+    activeValue: 1,
+  });
 }
 
-onAuthStateChanged(auth, (user) => {
-	if (user) {
-		// User is signed in, see docs for a list of available properties
-		// https://firebase.google.com/docs/reference/js/auth.user
-		const uid = user.uid;
-		// ...
-	} else {
-		// User is signed out
-		// ...
-	}
-});
+export { addUserInDatabase, auth, usersRef };

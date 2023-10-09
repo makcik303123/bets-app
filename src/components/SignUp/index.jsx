@@ -2,39 +2,40 @@ import React from "react";
 import "./login.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addUserInDatabase } from "../../firebase";
 
-const Login = ({ popupLogin, setPopupLogin }) => {
+const SignUp = ({ popupSignUp, setPopupSignUp }) => {
   const dispatch = useDispatch();
   const [inputEmail, setInputEmail] = React.useState("");
   const [inputPassword, setinptPassword] = React.useState("");
 
-  function signInAccount(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
+  function handleSubmit(e) {
+    e.preventDefault();
+    createAccount(inputEmail, inputPassword);
+  }
+
+  function createAccount(email, password) {
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log("You clicked submit.");
-        setPopupLogin(false);
+        console.log(user);
+        addUserInDatabase(user.uid, email, password, Date.now());
+        setPopupSignUp(false);
       })
       .catch((error) => {
         console.log(error);
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
+        // ..
       });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    signInAccount(inputEmail, inputPassword);
-  }
-
   return (
-    <div className={popupLogin ? "active login-wrapper" : "login-wrapper"}>
+    <div className={popupSignUp ? "active login-wrapper" : "login-wrapper"}>
       <div className="login-box">
-        <h2>Login Form</h2>
+        <h2>Sign Up</h2>
         <form action="" onSubmit={handleSubmit}>
           <div className="user-box">
             <input
@@ -63,11 +64,11 @@ const Login = ({ popupLogin, setPopupLogin }) => {
             <span></span>
             <span></span>
             <span></span>
-            Login
+            Sign Up
           </button>
         </form>
         <div
-          onClick={() => setPopupLogin(false)}
+          onClick={() => setPopupSignUp(false)}
           className="login-close-wrapper"
         >
           <div className="login-close">
@@ -80,4 +81,4 @@ const Login = ({ popupLogin, setPopupLogin }) => {
   );
 };
 
-export default Login;
+export default SignUp;

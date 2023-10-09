@@ -49,7 +49,9 @@ function Panel({ dataGames, isLoading }) {
               <p>Loading...</p>
             </div>
           ) : dataGames[0] ? (
-            dataGames.map((dataGame) => <Game dataGame={dataGame} />)
+            dataGames.map((dataGame) => (
+              <Game dataGame={dataGame} key={dataGame.id} />
+            ))
           ) : (
             <div className="content-not-found">
               <span>Upcomming mathes not found.</span>
