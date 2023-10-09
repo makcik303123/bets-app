@@ -1,26 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	list: [],
+  list: [],
 };
 
 export const betSlipListSlice = createSlice({
-	name: "betSlipList",
-	initialState,
-	reducers: {
-		addBetSlip(state, action) {
-			state.list.push(action.payload);
-		},
-		removeBetSlip(state, action) {
-			state.list.filter((obj) => obj.id !== action.payload);
-		},
-		clearBetSlip(state) {
-			state.list = [];
-		},
-	},
+  name: "betSlipList",
+  initialState,
+  reducers: {
+    clickOnMultiplayer(state, action) {
+      const founderItem = state.list.find(
+        (obj) => obj.id === action.payload.id
+      );
+
+      if (founderItem) {
+        console.log(founderItem);
+        state.list = state.list.filter((obj) => obj.id !== action.payload.id);
+      } else {
+        state.list.push(action.payload);
+      }
+    },
+    removeBetSlip(state, action) {
+      console.log(action.payload);
+      state.list = state.list.filter((obj) => obj.id !== action.payload.id);
+    },
+    clearBetSlipList(state) {
+      state.list = [];
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const { changeAuthUid } = authUidSlice.actions;
+export const { clickOnMultiplayer, removeBetSlip, clearBetSlipList } =
+  betSlipListSlice.actions;
 
-export default authUidSlice.reducer;
+export default betSlipListSlice.reducer;
