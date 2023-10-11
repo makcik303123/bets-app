@@ -22,7 +22,7 @@ export const betSlipListSlice = createSlice({
     },
     removeBetSlip(state, action) {
       console.log(action.payload);
-      state.list = state.list.filter((obj) => obj.id !== action.payload.id);
+      state.list = state.list.filter((obj) => obj.id !== action.payload);
     },
     clearBetSlipList(state) {
       state.list = [];

@@ -17,8 +17,11 @@ function Game({ dataGame }) {
 
     const betSlipData = {
       id: dataGame.id + "_" + btnId,
-      team: dataGame.opponents[btnId].opponent.name,
+      firstTeam: dataGame.opponents[0]?.opponent.name || "TBD",
+      secondTeam: dataGame.opponents[1]?.opponent.name || "TBD",
+      teamWinner: dataGame.opponents[btnId].opponent.name || "TBD",
       event: "Match winner",
+      multiplayer: 1.85,
     };
 
     console.log(betSlipData);
