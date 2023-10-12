@@ -12,6 +12,7 @@ function Helper() {
 			<div className="switcher">
 				{buttons.map((button, i) => (
 					<button
+						key={i}
 						onClick={() => setActiveButton(i)}
 						className={
 							"switcher-button" + (activeButton === i ? " active" : "")
