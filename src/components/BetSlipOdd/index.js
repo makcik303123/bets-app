@@ -7,14 +7,12 @@ import { removeBetSlip } from "../../redux/slices/betSlipListSlice";
 
 function BetSlipOdd({ data }) {
 	const { id, firstTeam, secondTeam, teamWinner, event, multiplayer } = data;
-	const [amount, setAmount] = React.useState("0");
+	const [amount, setAmount] = React.useState(0);
 	const dispatch = useDispatch();
-
-	console.log(amount);
 
 	const onChangeInput = (event) => {
 		const value = event.target.value.replace(/[^0-9.]/g, "");
-		setAmount(value.slice(0, 6));
+		setAmount(+value.slice(0, 6));
 	};
 
 	return (
@@ -39,7 +37,7 @@ function BetSlipOdd({ data }) {
 			<div className="bet__counter">
 				<div className="counter__wrapper">
 					<button className="counter__button">
-						<svg width={20} height={20} onClick={setAmount(amount--)}>
+						<svg width={20} height={20} onClick={() => setAmount(amount - 1)}>
 							<use href="./img/icons/sprite.svg#minus-bet-slip"></use>
 						</svg>
 					</button>
@@ -47,11 +45,11 @@ function BetSlipOdd({ data }) {
 						inputMode="decimal"
 						className="counter__input"
 						type="text"
-						value={amount === "0" ? "" : amount}
+						value={amount || ""}
 						onChange={(e) => onChangeInput(e)}
 					/>
 					<button className="counter__button">
-						<svg width={20} height={20} onClick={setAmount(amount++)}>
+						<svg width={20} height={20} onClick={() => setAmount(amount + 1)}>
 							<use href="./img/icons/sprite.svg#plus-bet-slip"></use>
 						</svg>
 					</button>

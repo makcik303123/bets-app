@@ -5,16 +5,17 @@ import "./Game.scss";
 
 import { clickOnMultiplayer } from "../../redux/slices/betSlipListSlice";
 
-function Game({ dataGame }) {
+function Game({ dataGame, list }) {
 	const multiplayer = 1.85;
 	const { status } = dataGame;
 
 	const dispatch = useDispatch();
 
+	const activeLeftBtn = list.some((obj) => obj.id === dataGame.id + "_0");
+	const activeRightBtn = list.some((obj) => obj.id === dataGame.id + "_1");
+
 	function clickHandler(btn) {
 		const btnId = btn.target.id;
-
-		console.log(btn.target);
 
 		const betSlipData = {
 			id: dataGame.id + "_" + btnId,
@@ -25,12 +26,6 @@ function Game({ dataGame }) {
 			multiplayer: 1.85,
 		};
 		dispatch(clickOnMultiplayer(betSlipData));
-
-		if (btn.target.classList.contains("active")) {
-			btn.target.classList.remove("active");
-		} else {
-			btn.target.classList.add("active");
-		}
 	}
 
 	return (
@@ -79,7 +74,7 @@ function Game({ dataGame }) {
 					</div>
 					<div
 						id="0"
-						className="team-btn"
+						className={"team-btn " + (activeLeftBtn ? "active" : "")}
 						onClick={clickHandler}
 						data-state="unactive"
 					>
@@ -101,7 +96,11 @@ function Game({ dataGame }) {
 							alt="logo"
 						/>
 					</div>
-					<div id="1" className="team-btn" onClick={clickHandler}>
+					<div
+						id="1"
+						className={"team-btn " + (activeRightBtn ? "active" : "")}
+						onClick={clickHandler}
+					>
 						{multiplayer}
 					</div>
 				</div>
