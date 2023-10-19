@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
 
@@ -11,6 +11,15 @@ function BetSlip() {
 	const list = useSelector((state) => state.betSlipListReducer.list);
 	const dispatch = useDispatch();
 
+	const [activeSwitcher, setActiveSwitcher] = useState(0);
+	const switcherButtons = ["single", `multi(${list.length})`];
+
+	const listHeight = () => {
+		const betHeight = !!activeSwitcher ? 90 : 195;
+		console.log(betHeight);
+		return list.length > 3 ? 3 * betHeight : list.length * betHeight;
+	};
+
 	if (!list.length) {
 		return <div className="">not found</div>;
 	}
@@ -20,8 +29,16 @@ function BetSlip() {
 			<div className="bet-slip__head head">
 				<div className="head__wrapper">
 					<div className="head__switcher">
-						<button className="switcher__btn active">single</button>
-						<button className="switcher__btn">multi(2)</button>
+						{switcherButtons.map((btn, i) => (
+							<button
+								className={
+									"switcher__btn " + (activeSwitcher === i ? "active" : "")
+								}
+								onClick={() => setActiveSwitcher(i)}
+							>
+								{btn}
+							</button>
+						))}
 					</div>
 					<button
 						className="head__close"
@@ -47,7 +64,7 @@ function BetSlip() {
 
 			<div className="bet-slip__content">
 				<Scrollbars
-					style={{ height: "100%" }}
+					style={{ height: listHeight() + "px" }}
 					autoHide
 					autoHideTimeout={1000}
 					autoHideDuration={200}
