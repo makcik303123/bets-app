@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	list: [],
+	listType: "single" | "multi"
 };
 
 export const betSlipListSlice = createSlice({
@@ -27,11 +28,14 @@ export const betSlipListSlice = createSlice({
 		clearBetSlipList(state) {
 			state.list = [];
 		},
+		changeListType(state, action) {
+			state.listType = action.payload;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { clickOnMultiplayer, removeBetSlip, clearBetSlipList } =
+export const { clickOnMultiplayer, removeBetSlip, clearBetSlipList, changeListType } =
 	betSlipListSlice.actions;
 
 export default betSlipListSlice.reducer;

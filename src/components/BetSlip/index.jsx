@@ -1,22 +1,23 @@
 import { useState } from "react";
 import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
+import BetSlipOddCounter from "../BetSlipOdd/BetSlipOddCounter";
+import BetSlipOddTotal from "../BetSlipOdd/BetSlipOddTotal";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useSelector, useDispatch } from "react-redux";
 
-import { clearBetSlipList } from "../../redux/slices/betSlipListSlice";
+import { clearBetSlipList, changeListType } from "../../redux/slices/betSlipListSlice";
 
 function BetSlip() {
-	const list = useSelector((state) => state.betSlipListReducer.list);
+	const {list, listType} = useSelector((state) => state.betSlipListReducer);
 	const dispatch = useDispatch();
 
-	const [activeSwitcher, setActiveSwitcher] = useState(0);
+
 	const switcherButtons = ["single", `multi(${list.length})`];
 
 	const listHeight = () => {
-		const betHeight = !!activeSwitcher ? 90 : 195;
-		console.log(betHeight);
+		const betHeight = !!listType ? 90 : 195;
 		return list.length > 3 ? 3 * betHeight : list.length * betHeight;
 	};
 
@@ -32,9 +33,9 @@ function BetSlip() {
 						{switcherButtons.map((btn, i) => (
 							<button
 								className={
-									"switcher__btn " + (activeSwitcher === i ? "active" : "")
+									"switcher__btn " + (listType === i ? "active" : "")
 								}
-								onClick={() => setActiveSwitcher(i)}
+								onClick={() => dispatch(changeListType(i))}
 							>
 								{btn}
 							</button>
@@ -74,8 +75,10 @@ function BetSlip() {
 					renderView={(props) => <div {...props} className="view" />}
 				>
 					{list.map((item) => (
-						<BetSlipOdd data={item} key={item.id} />
+						<BetSlipOdd data={item} key={item.id} listType={listType}/>
 					))}
+					{/* {!!listType || <BetSlipOddCounter amount={amount} setAmount={setAmount} onChangeInput={onChangeInput}/> }
+				{!!listType || <BetSlipOddTotal amount={amount} multiplayer={multiplayer}/>} */}
 				</Scrollbars>
 			</div>
 
