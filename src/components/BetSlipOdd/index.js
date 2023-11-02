@@ -36,9 +36,16 @@ function BetSlipOdd({ data, listType }) {
 					<span className="user-selected__multiplayer">{multiplayer}</span>
 				</div>
 			</div>
-			{!!listType || <BetSlipOddCounter amount={amount} setAmount={setAmount} onChangeInput={onChangeInput}/> }
-				{!!listType || <BetSlipOddTotal amount={amount} multiplayer={multiplayer}/>}
-			
+			{!!listType || (
+				<BetSlipOddCounter
+					amount={amount}
+					setAmount={setAmount}
+					onChangeInput={onChangeInput}
+				/>
+			)}
+			{!!listType || (
+				<BetSlipOddTotal amount={amount} multiplayer={multiplayer} />
+			)}
 		</div>
 	);
 }
