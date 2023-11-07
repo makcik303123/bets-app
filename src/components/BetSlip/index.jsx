@@ -77,8 +77,13 @@ function BetSlip() {
           )}
           renderView={(props) => <div {...props} className="view" />}
         >
-          {list.map((item) => (
-            <BetSlipOdd data={item} key={item.id} listType={listType} />
+          {list.map((item, index) => (
+            <BetSlipOdd
+              index={index}
+              data={item}
+              key={item.id}
+              listType={listType}
+            />
           ))}
           {/* {!!listType || <BetSlipOddCounter amount={amount} setAmount={setAmount} onChangeInput={onChangeInput}/> }
 				{!!listType || <BetSlipOddTotal amount={amount} multiplayer={multiplayer}/>} */}
