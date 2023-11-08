@@ -1,4 +1,5 @@
 import React from "react";
+import "./BetSlipOddTotal.scss";
 
 function BetSlipOddTotal({ amount, multiplayer }) {
 	return (

@@ -1,0 +1,81 @@
+.bet__counter {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 10px 10px;
+
+	.counter__wrapper {
+		display: flex;
+		align-items: center;
+		border-radius: 6px;
+		padding: 4px;
+		background-color: #0e1116;
+		box-shadow: 0 1px rgba(255, 255, 255, 0.05);
+
+		.counter__button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: var(--text-dark-color-100);
+			font-size: 14px;
+			font-weight: 700;
+			min-width: 24px;
+			height: 24px;
+			padding: 0;
+			border: none;
+			border-radius: 3px;
+			background: var(--gradient-main);
+			box-shadow: 0 1px inset rgba(255, 255, 255, 0.05),
+				0 1px 2px rgba(0, 0, 0, 0.57);
+
+			&:hover {
+				color: var(--text-color-100);
+				background: #06b97c linear-gradient(to bottom, #06b97c 0, #0d966e 89%);
+				box-shadow: 0 5px 2px rgba(0, 0, 0, 0.23),
+					0 0 10px rgba(0, 212, 135, 0.7);
+			}
+		}
+
+		.counter__input {
+			font-size: 14px;
+			font-weight: 700;
+			text-align: center;
+			padding: 0 5px;
+			max-width: 100px;
+			color: var(--text-dark-color-100);
+			border: 1px solid transparent;
+			border-radius: 3px;
+			font-size: 14px;
+			font-weight: 700;
+		}
+	}
+
+	.counter__max-bet {
+		height: 32px;
+		padding: 0 9px;
+		text-transform: uppercase;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--text-dark-color-100);
+		font-size: 14px;
+		font-weight: 700;
+		min-width: 24px;
+		border: none;
+		border-radius: 3px;
+		background: var(--gradient-main);
+		box-shadow: 0 1px inset rgba(255, 255, 255, 0.05),
+			0 1px 2px rgba(0, 0, 0, 0.57);
+
+		&:hover:not(:disabled) {
+			color: var(--text-color-100);
+			background: #06b97c linear-gradient(to bottom, #06b97c 0, #0d966e 89%);
+			box-shadow: 0 5px 2px rgba(0, 0, 0, 0.23), 0 0 10px rgba(0, 212, 135, 0.7);
+		}
+		&:disabled {
+			color: #7f858f !important;
+			background: #232b32 !important;
+		}
+	}
+}

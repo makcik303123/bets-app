@@ -1,195 +1,93 @@
 .content__bet {
-  background-color: #1c232b;
-  border-radius: 6px;
-  margin: 0 0 8px;
-  transition: box-shadow 0.3s;
-  position: relative;
+	background-color: #1c232b;
+	border-radius: 6px;
+	margin: 0 0 8px;
+	transition: box-shadow 0.3s;
+	position: relative;
 
-  .bet__delete {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    color: rgb(217 63 63);
-    cursor: pointer;
-    z-index: 1;
-  }
+	.bet__delete {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		color: rgb(217 63 63);
+		cursor: pointer;
+		z-index: 1;
+	}
 
-  .bet__information {
-    .information__header {
-      display: flex;
-      padding: 12px 26px 8px 12px;
-      font-size: 16px;
-      line-height: 16px;
-      font-weight: 700;
-      position: relative;
-      white-space: nowrap;
-      overflow: hidden;
-      color: rgb(127 133 143);
+	.bet__information {
+		.information__header {
+			display: flex;
+			padding: 12px 26px 8px 12px;
+			font-size: 16px;
+			line-height: 16px;
+			font-weight: 700;
+			position: relative;
+			white-space: nowrap;
+			overflow: hidden;
+			color: rgb(127 133 143);
 
-      .header__title {
-        display: block;
-        position: relative;
-        text-align: center;
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        flex: initial;
-      }
+			.header__title {
+				display: block;
+				position: relative;
+				text-align: center;
+				flex: 1;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				flex: initial;
+			}
 
-      .header__lable {
-        display: inline-block;
-        vertical-align: middle;
-        font-weight: 700;
-        margin: 0 5px;
-      }
-    }
+			.header__lable {
+				display: inline-block;
+				vertical-align: middle;
+				font-weight: 700;
+				margin: 0 5px;
+			}
+		}
 
-    .information__user-selected {
-      display: flex;
+		.information__user-selected {
+			display: flex;
 
-      justify-content: space-between;
-      align-items: flex-end;
-      margin: 0;
-      padding: 0 12px 12px;
+			justify-content: space-between;
+			align-items: flex-end;
+			margin: 0;
+			padding: 0 12px 12px;
 
-      .user-selected__wrapper {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        width: 100%;
+			.user-selected__wrapper {
+				align-items: flex-start;
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+				width: 100%;
 
-        .user-selected__event {
-          font-size: 12px;
-          color: var(--text-dark-color-100);
-          text-transform: uppercase;
-          justify-content: flex-start;
-          flex: 1;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .user-selected__team {
-          color: var(--primary-loot-color-100);
-          font-size: 14px;
-          font-weight: 700;
-          text-transform: none;
-          padding-bottom: 0;
-          justify-content: flex-start;
-          flex: 1;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-      .user-selected__multiplayer {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--text-color-60);
-      }
-    }
-  }
-
-  .bet__counter {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px 10px;
-
-    .counter__wrapper {
-      display: flex;
-      align-items: center;
-      border-radius: 6px;
-      padding: 4px;
-      background-color: #0e1116;
-      box-shadow: 0 1px rgba(255, 255, 255, 0.05);
-
-      .counter__button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--text-dark-color-100);
-        font-size: 14px;
-        font-weight: 700;
-        min-width: 24px;
-        height: 24px;
-        padding: 0;
-        border: none;
-        border-radius: 3px;
-        background: var(--gradient-main);
-        box-shadow: 0 1px inset rgba(255, 255, 255, 0.05),
-          0 1px 2px rgba(0, 0, 0, 0.57);
-
-        &:hover {
-          color: var(--text-color-100);
-          background: #06b97c linear-gradient(to bottom, #06b97c 0, #0d966e 89%);
-          box-shadow: 0 5px 2px rgba(0, 0, 0, 0.23),
-            0 0 10px rgba(0, 212, 135, 0.7);
-        }
-      }
-
-      .counter__input {
-        font-size: 14px;
-        font-weight: 700;
-        text-align: center;
-        padding: 0 5px;
-        max-width: 100px;
-        color: var(--text-dark-color-100);
-        border: 1px solid transparent;
-        border-radius: 3px;
-        font-size: 14px;
-        font-weight: 700;
-      }
-    }
-
-    .counter__max-bet {
-      height: 32px;
-      padding: 0 9px;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--text-dark-color-100);
-      font-size: 14px;
-      font-weight: 700;
-      min-width: 24px;
-      border: none;
-      border-radius: 3px;
-      background: var(--gradient-main);
-      box-shadow: 0 1px inset rgba(255, 255, 255, 0.05),
-        0 1px 2px rgba(0, 0, 0, 0.57);
-
-      &:hover:not(:disabled) {
-        color: var(--text-color-100);
-        background: #06b97c linear-gradient(to bottom, #06b97c 0, #0d966e 89%);
-        box-shadow: 0 5px 2px rgba(0, 0, 0, 0.23),
-          0 0 10px rgba(0, 212, 135, 0.7);
-      }
-      &:disabled {
-        color: #7f858f !important;
-        background: #232b32 !important;
-      }
-    }
-  }
-
-  .bet__total {
-    padding: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    box-shadow: 0 1px inset rgba(0, 0, 0, 0.3);
-    line-height: 1;
-
-    .total__row {
-      color: var(--text-dark-color-100);
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      padding-bottom: 5px;
-
-      .total__value {
-        font-weight: 700;
-      }
-    }
-  }
+				.user-selected__event {
+					font-size: 12px;
+					color: var(--text-dark-color-100);
+					text-transform: uppercase;
+					justify-content: flex-start;
+					flex: 1;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.user-selected__team {
+					color: var(--primary-loot-color-100);
+					font-size: 14px;
+					font-weight: 700;
+					text-transform: none;
+					padding-bottom: 0;
+					justify-content: flex-start;
+					flex: 1;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+			.user-selected__multiplayer {
+				font-size: 14px;
+				font-weight: 700;
+				color: var(--text-color-60);
+			}
+		}
+	}
 }
