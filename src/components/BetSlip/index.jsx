@@ -15,8 +15,6 @@ import {
 function BetSlip() {
 	const user = useSelector((state) => state.getUserDataReducer.data);
 
-	console.log(user);
-
 	const { list, listType, amount } = useSelector(
 		(state) => state.betSlipListReducer
 	);
@@ -33,17 +31,22 @@ function BetSlip() {
 		return list.length > 3 ? 3 * betHeight : list.length * betHeight;
 	};
 
-	// const checkDuplicate = () => {
-	// 	list.forEach((obj) => {
-	// 		for (const iterator of list) {
-	// 			if (iterator.matchId === obj.matchId && iterator.id !== obj.id) {
-	// 				console.log("gege");
-	// 				obj.duplicate = true;
-	// 			}
-	// 		}
-	// 	});
-	// };
-	// checkDuplicate();
+	const checkDuplicate = () => {
+		if (!listType) {
+			return [];
+		}
+
+		const result = [];
+
+		list.forEach((obj) => {
+			for (const iterator of list) {
+				if (iterator.matchId === obj.matchId && iterator.id !== obj.id) {
+					result.push(obj.id);
+				}
+			}
+		});
+		return result;
+	};
 
 	if (!list.length) {
 		return <div className="">not found</div>;
@@ -103,6 +106,7 @@ function BetSlip() {
 							data={item}
 							key={item.id}
 							listType={listType}
+							invalid={checkDuplicate().includes(item.id)}
 						/>
 					))}
 				</Scrollbars>
