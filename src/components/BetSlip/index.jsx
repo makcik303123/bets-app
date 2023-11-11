@@ -3,6 +3,7 @@ import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
 import BetSlipOddCounter from "../BetSlipOdd/BetSlipOddCounter";
 import BetSlipOddTotal from "../BetSlipOdd/BetSlipOddTotal";
+import { updateBetSlipList } from "../../firebase";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +15,9 @@ import {
 
 function BetSlip() {
 	const user = useSelector((state) => state.getUserDataReducer.data);
+	const uid = useSelector((state) => state.authUidReducer.value);
+
+	console.log(uid, "uid");
 
 	const { list, listType, amount } = useSelector(
 		(state) => state.betSlipListReducer
@@ -23,6 +27,8 @@ function BetSlip() {
 	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
 
 	console.log(list);
+
+	updateBetSlipList(uid, list);
 
 	const switcherButtons = ["single", `multi(${list.length})`];
 

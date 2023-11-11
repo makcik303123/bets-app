@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore, updateDoc } from "firebase/firestore";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { collection, setDoc, doc, increment } from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyAxXARxOiS1Hn10q5vQSsbrYyhbPv0QZTM",
@@ -34,13 +34,14 @@ async function addUserInDatabase(uid, email, password, createTime) {
 	});
 }
 
-async function addSingleBets(uid) {
+async function updateBetSlipList(uid, list) {
+	console.log(uid, list);
 	await updateDoc(doc(usersRef, uid), {
-		balance: 150,
-		activeBetsList: [],
+		// balance: increment(-value),
+		BetSlipList: list,
 	});
 }
 
-// addSingleBets("NQy531wdPgXkgN2syNnscz1elea2");
+// updateBetSlipList("NQy531wdPgXkgN2syNnscz1elea2");
 
-export { addUserInDatabase, auth, usersRef };
+export { addUserInDatabase, auth, usersRef, updateBetSlipList };
