@@ -28,6 +28,9 @@ export const betSlipListSlice = createSlice({
 		clearBetSlipList(state) {
 			state.list = [];
 		},
+		unloadBetSlipList(state, action) {
+			state.list = action.payload;
+		},
 
 		handlerAmount(state, action) {
 			const { type, index, amount: value } = action.payload;
@@ -51,6 +54,7 @@ export const {
 	clearBetSlipList,
 	changeListType,
 	handlerAmount,
+	unloadBetSlipList,
 } = betSlipListSlice.actions;
 
 export default betSlipListSlice.reducer;

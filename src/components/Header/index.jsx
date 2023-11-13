@@ -38,17 +38,16 @@ function Header() {
 				dispatch(changeUserData(doc.data()));
 				console.log("Current data: ", doc.data());
 			});
-			console.log(userData);
 			return unsub;
 		} else {
-			dispatch(changeUserData({}));
+			dispatch(changeUserData(false));
 		}
 	}, [authUid]);
 
 	const signOutFromAccount = () => {
 		signOut(auth)
 			.then(() => {
-				dispatch(changeUserData({}));
+				dispatch(changeUserData(false));
 			})
 			.catch((error) => {
 				console.log(error);

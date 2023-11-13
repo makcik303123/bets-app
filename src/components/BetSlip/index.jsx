@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
 import BetSlipOddCounter from "../BetSlipOdd/BetSlipOddCounter";
@@ -11,24 +11,41 @@ import { useSelector, useDispatch } from "react-redux";
 import {
 	clearBetSlipList,
 	changeListType,
+	unloadBetSlipList,
 } from "../../redux/slices/betSlipListSlice";
 
 function BetSlip() {
 	const user = useSelector((state) => state.getUserDataReducer.data);
 	const uid = useSelector((state) => state.authUidReducer.value);
-
-	console.log(uid, "uid");
-
 	const { list, listType, amount } = useSelector(
 		(state) => state.betSlipListReducer
 	);
 	const dispatch = useDispatch();
 
-	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
+	useEffect(() => {
+		const fetchData = async () => {
+			if (user.BetSlipList) {
+				dispatch(unloadBetSlipList(user.BetSlipList));
+			} else {
+				dispatch(clearBetSlipList());
+			}
+		};
 
-	console.log(list);
+		fetchData();
+	}, [user]);
 
-	updateBetSlipList(uid, list);
+	useEffect(() => {
+		if (!uid || !user) {
+			return;
+		}
+		if (list.length !== user.BetSlipList.length) {
+			updateBetSlipList(uid, list);
+		}
+	}, [uid, list]);
+
+	if (!list.length) {
+		return <div className="">not found</div>;
+	}
 
 	const switcherButtons = ["single", `multi(${list.length})`];
 
@@ -36,6 +53,8 @@ function BetSlip() {
 		const betHeight = !!listType ? 90 : 195;
 		return list.length > 3 ? 3 * betHeight : list.length * betHeight;
 	};
+
+	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
 
 	const checkDuplicate = () => {
 		if (!listType) {
@@ -53,10 +72,6 @@ function BetSlip() {
 		});
 		return result;
 	};
-
-	if (!list.length) {
-		return <div className="">not found</div>;
-	}
 
 	return (
 		<div className="bet-slip">

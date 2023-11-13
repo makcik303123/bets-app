@@ -35,7 +35,6 @@ async function addUserInDatabase(uid, email, password, createTime) {
 }
 
 async function updateBetSlipList(uid, list) {
-	console.log(uid, list);
 	await updateDoc(doc(usersRef, uid), {
 		// balance: increment(-value),
 		BetSlipList: list,
