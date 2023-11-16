@@ -34,13 +34,11 @@ async function addUserInDatabase(uid, email, password, createTime) {
 	});
 }
 
-async function updateBetSlipList(uid, list) {
-	await updateDoc(doc(usersRef, uid), {
-		// balance: increment(-value),
-		BetSlipList: list,
-	});
+async function updateUserData(uid, obj) {
+	console.log(uid, obj);
+	await updateDoc(doc(usersRef, uid), obj);
 }
 
-// updateBetSlipList("NQy531wdPgXkgN2syNnscz1elea2");
+// updateUserData("NQy531wdPgXkgN2syNnscz1elea2");
 
-export { addUserInDatabase, auth, usersRef, updateBetSlipList };
+export { addUserInDatabase, auth, usersRef, updateUserData };

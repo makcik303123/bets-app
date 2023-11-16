@@ -3,7 +3,7 @@ import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
 import BetSlipOddCounter from "../BetSlipOdd/BetSlipOddCounter";
 import BetSlipOddTotal from "../BetSlipOdd/BetSlipOddTotal";
-import { updateBetSlipList } from "../../firebase";
+import { updateUserData } from "../../firebase";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ import {
 	changeListType,
 	unloadBetSlipList,
 } from "../../redux/slices/betSlipListSlice";
+import validateBalance from "../../hooks/validateBalance";
 
 function BetSlip() {
 	const user = useSelector((state) => state.getUserDataReducer.data);
@@ -39,7 +40,7 @@ function BetSlip() {
 			return;
 		}
 		if (list.length !== user.BetSlipList.length) {
-			updateBetSlipList(uid, list);
+			updateUserData(uid, { BetSlipList: list });
 		}
 	}, [uid, list]);
 
@@ -55,6 +56,12 @@ function BetSlip() {
 	};
 
 	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
+
+	const sendBetSlip = () => {
+		const { balance, activeValue } = user;
+
+		console.log(validateBalance(list, balance, activeValue));
+	};
 
 	const checkDuplicate = () => {
 		if (!listType) {
@@ -141,7 +148,9 @@ function BetSlip() {
 
 			<div className="bet-slip__footer">
 				{user.status ? (
-					<button className="button">Make a bet</button>
+					<button onClick={() => sendBetSlip()} className="button">
+						Make a bet
+					</button>
 				) : (
 					<button className="button">Login</button>
 				)}

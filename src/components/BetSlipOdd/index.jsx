@@ -18,7 +18,7 @@ function BetSlipOdd({ data, listType, index, invalid }) {
 		multiplayer,
 		amount,
 	} = data;
-	const [duplicate, setDuplicate] = React.useState(0);
+
 	const dispatch = useDispatch();
 
 	return (

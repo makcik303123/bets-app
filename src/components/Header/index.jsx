@@ -7,16 +7,16 @@ import { Link } from "react-router-dom";
 import SignUp from "../SignUp";
 
 import { changeUserData } from "../../redux/slices/userSlice";
-import { changeActiveValue } from "../../redux/slices/activeValueSlice";
+// import { changeActiveValue } from "../../redux/slices/activeValueSlice";
 import { changeAuthUid } from "../../redux/slices/authUidSlice";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
-import { auth, usersRef } from "../../firebase";
+import { auth, updateUserData, usersRef } from "../../firebase";
 
 function Header() {
-	const activeValue = useSelector((state) => state.activeValueRducer.value);
-	const userData = useSelector((state) => state.getUserDataReducer.data);
+	// const activeValue = useSelector((state) => state.activeValueRducer.value);
+	const user = useSelector((state) => state.getUserDataReducer.data);
 	const authUid = useSelector((state) => state.authUidReducer.value);
 	const dispatch = useDispatch();
 	const selectRef = React.useRef();
@@ -54,6 +54,14 @@ function Header() {
 			});
 	};
 
+	const clickOnValue = (index) => {
+		if (user.activeValue === index) {
+			return;
+		}
+
+		updateUserData(authUid, { activeValue: index });
+	};
+
 	const arrayLinks = [
 		"bets",
 		"pro",
@@ -85,7 +93,7 @@ function Header() {
 		return () => document.body.removeEventListener("click", handleClickOutside);
 	}, []);
 
-	const { balance, status } = userData;
+	const { balance, status, activeValue } = user;
 
 	return (
 		<div>
@@ -137,7 +145,7 @@ function Header() {
 												<div className="balance__select">
 													{arrayValues.map((value, i) => (
 														<div
-															onClick={() => dispatch(changeActiveValue(i))}
+															onClick={() => clickOnValue(i)}
 															className="select__row"
 														>
 															<div className="row__value">{value.value}</div>
