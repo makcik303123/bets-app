@@ -12,10 +12,14 @@ import {
 	clearBetSlipList,
 	changeListType,
 	unloadBetSlipList,
+	removeBetSlip,
 } from "../../redux/slices/betSlipListSlice";
 import validateBalance from "../../hooks/validateBalance";
+import { arrayUnion, increment } from "firebase/firestore";
 
 function BetSlip() {
+	const [sendStatus, setSendStatus] = useState(null);
+
 	const user = useSelector((state) => state.getUserDataReducer.data);
 	const uid = useSelector((state) => state.authUidReducer.value);
 	const { list, listType, amount } = useSelector(
@@ -58,9 +62,44 @@ function BetSlip() {
 	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
 
 	const sendBetSlip = () => {
-		const { balance, activeValue } = user;
+		const { balance, activeValue, historyBetsList } = user;
 
-		console.log(validateBalance(list, balance, activeValue));
+		const result = validateBalance(list, balance, activeValue);
+
+		const { emptyArray, remainderArray, successfulArray, spendMoney } = result;
+
+		const clearStatus = () => {
+			setTimeout(() => setSendStatus(null), 5000);
+		};
+
+		if (successfulArray.length) {
+			console.log(1);
+			setSendStatus("Bet confirm!");
+			successfulArray.forEach((el) => dispatch(removeBetSlip(el.id)));
+			console.log(spendMoney);
+			clearStatus();
+			console.log(arrayUnion);
+			updateUserData(uid, {
+				historyBetsList: {
+					active: [...historyBetsList.active, ...successfulArray],
+				},
+				balance: increment(-Math.round(spendMoney * 100) / 100),
+			});
+			return;
+		}
+
+		if (remainderArray.length) {
+			console.log(2);
+			setSendStatus("You dont have money!");
+			clearStatus();
+		}
+		if (emptyArray.length) {
+			console.log(3);
+			setSendStatus("Bet not intered");
+			clearStatus();
+		}
+
+		console.log(result);
 	};
 
 	const checkDuplicate = () => {
@@ -68,16 +107,16 @@ function BetSlip() {
 			return [];
 		}
 
-		const result = [];
+		const duplicateArray = [];
 
 		list.forEach((obj) => {
 			for (const iterator of list) {
 				if (iterator.matchId === obj.matchId && iterator.id !== obj.id) {
-					result.push(obj.id);
+					duplicateArray.push(obj.id);
 				}
 			}
 		});
-		return result;
+		return duplicateArray;
 	};
 
 	return (
@@ -138,6 +177,7 @@ function BetSlip() {
 						/>
 					))}
 				</Scrollbars>
+				<div>{sendStatus}</div>
 				{!!listType && (
 					<>
 						<BetSlipOddCounter amount={amount} />

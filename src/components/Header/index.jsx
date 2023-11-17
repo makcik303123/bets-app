@@ -135,7 +135,9 @@ function Header() {
 													{arrayValues[activeValue].value}
 												</div>
 												<div className="main__amount">
-													{arrayValues[activeValue].multiplayer * balance}
+													{Math.round(
+														arrayValues[activeValue].multiplayer * balance * 100
+													) / 100}
 												</div>
 											</div>
 											<div className="balance__bonus">Bonus: 0.00</div>
@@ -150,7 +152,8 @@ function Header() {
 														>
 															<div className="row__value">{value.value}</div>
 															<div className="row__result">
-																{value.multiplayer * balance}
+																{Math.round(value.multiplayer * balance * 100) /
+																	100}
 															</div>
 														</div>
 													))}

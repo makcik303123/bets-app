@@ -3,19 +3,34 @@ import { arrayValues } from "../variablres/variables";
 const validateBalance = (list, balance, activeValue) => {
 	console.log(balance, "balance");
 
+	const remainderArray = [];
+	const successfulArray = [];
+	const emptyArray = [];
+	let spendMoney = 0;
+
 	const { multiplayer } = arrayValues[activeValue];
 
-	let result = balance;
+	const handlerList = (object) => {
+		const amount = object.amount / multiplayer;
 
-	list.forEach((obj) => {
-		const amount = obj.amount / multiplayer;
+		if (amount === 0) {
+			emptyArray.push(object);
+			return;
+		}
 
-		console.log(amount, "amount");
+		if (balance >= amount) {
+			successfulArray.push(object);
+			balance = balance - amount;
+			spendMoney += amount;
+		} else {
+			remainderArray.push(object);
+		}
+		console.log(balance);
+	};
 
-		result = result - amount;
-	});
+	list.forEach((obj) => handlerList(obj));
 
-	return result;
+	return { remainderArray, successfulArray, emptyArray, spendMoney };
 };
 
 export default validateBalance;
