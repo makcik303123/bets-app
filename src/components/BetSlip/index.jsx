@@ -9,194 +9,208 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-	clearBetSlipList,
-	changeListType,
-	unloadBetSlipList,
-	removeBetSlip,
+  clearBetSlipList,
+  changeListType,
+  unloadBetSlipList,
+  removeBetSlip,
 } from "../../redux/slices/betSlipListSlice";
 import validateBalance from "../../hooks/validateBalance";
 import { arrayUnion, increment } from "firebase/firestore";
 
 function BetSlip() {
-	const [sendStatus, setSendStatus] = useState(null);
+  const [sendStatus, setSendStatus] = useState(null);
 
-	const user = useSelector((state) => state.getUserDataReducer.data);
-	const uid = useSelector((state) => state.authUidReducer.value);
-	const { list, listType, amount } = useSelector(
-		(state) => state.betSlipListReducer
-	);
-	const dispatch = useDispatch();
+  const user = useSelector((state) => state.getUserDataReducer.data);
+  const uid = useSelector((state) => state.authUidReducer.value);
+  const { list, listType, amount } = useSelector(
+    (state) => state.betSlipListReducer
+  );
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		const fetchData = async () => {
-			if (user.BetSlipList) {
-				dispatch(unloadBetSlipList(user.BetSlipList));
-			} else {
-				dispatch(clearBetSlipList());
-			}
-		};
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user.BetSlipList) {
+        dispatch(unloadBetSlipList(user.BetSlipList));
+      } else {
+        dispatch(clearBetSlipList());
+      }
+    };
 
-		fetchData();
-	}, [user]);
+    fetchData();
+  }, [user]);
 
-	useEffect(() => {
-		if (!uid || !user) {
-			return;
-		}
-		if (list.length !== user.BetSlipList.length) {
-			updateUserData(uid, { BetSlipList: list });
-		}
-	}, [uid, list]);
+  useEffect(() => {
+    if (!uid || !user) {
+      return;
+    }
+    if (list.length !== user.BetSlipList.length) {
+      updateUserData(uid, { BetSlipList: list });
+    }
+  }, [uid, list]);
 
-	if (!list.length) {
-		return <div className="">not found</div>;
-	}
+  if (!list.length) {
+    return (
+      <div className="no-bets">
+        <div className="no-bets__wrapper">
+          <svg className="no-bets__img" width="80" height="80">
+            <use href="./img/icons/sprite.svg#no-bets-img"></use>
+          </svg>
+          <div className="no-bets__text">
+            <span class="no-bets__title">Купон пуст</span>
+            <span class="no-bets__message">
+              Чтобы сделать ставку, выберите событие
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-	const switcherButtons = ["single", `multi(${list.length})`];
+  const switcherButtons = ["single", `multi(${list.length})`];
 
-	const listHeight = () => {
-		const betHeight = !!listType ? 90 : 195;
-		return list.length > 3 ? 3 * betHeight : list.length * betHeight;
-	};
+  const listHeight = () => {
+    const betHeight = !!listType ? 90 : 195;
+    return list.length > 3 ? 3 * betHeight : list.length * betHeight;
+  };
 
-	const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
+  const multiplayer = list.reduce((acc, item) => acc * item.multiplayer, 1);
 
-	const sendBetSlip = () => {
-		const { balance, activeValue, historyBetsList } = user;
+  const sendBetSlip = () => {
+    const { balance, activeValue, historyBetsList } = user;
 
-		const result = validateBalance(list, balance, activeValue);
+    const result = validateBalance(list, balance, activeValue);
 
-		const { emptyArray, remainderArray, successfulArray, spendMoney } = result;
+    const { emptyArray, remainderArray, successfulArray, spendMoney } = result;
 
-		const clearStatus = () => {
-			setTimeout(() => setSendStatus(null), 5000);
-		};
+    const clearStatus = () => {
+      setTimeout(() => setSendStatus(null), 5000);
+    };
 
-		if (successfulArray.length) {
-			console.log(1);
-			setSendStatus("Bet confirm!");
-			successfulArray.forEach((el) => dispatch(removeBetSlip(el.id)));
-			console.log(spendMoney);
-			clearStatus();
-			console.log(arrayUnion);
-			updateUserData(uid, {
-				historyBetsList: {
-					active: [...historyBetsList.active, ...successfulArray],
-				},
-				balance: increment(-Math.round(spendMoney * 100) / 100),
-			});
-			return;
-		}
+    if (successfulArray.length) {
+      console.log(1);
+      setSendStatus("Bet confirm!");
+      successfulArray.forEach((el) => dispatch(removeBetSlip(el.id)));
+      console.log(spendMoney);
+      clearStatus();
+      console.log(arrayUnion);
+      updateUserData(uid, {
+        historyBetsList: {
+          active: [...historyBetsList.active, ...successfulArray],
+        },
+        balance: increment(-Math.round(spendMoney * 100) / 100),
+      });
+      return;
+    }
 
-		if (remainderArray.length) {
-			console.log(2);
-			setSendStatus("You dont have money!");
-			clearStatus();
-		}
-		if (emptyArray.length) {
-			console.log(3);
-			setSendStatus("Bet not intered");
-			clearStatus();
-		}
+    if (remainderArray.length) {
+      console.log(2);
+      setSendStatus("You dont have money!");
+      clearStatus();
+    }
+    if (emptyArray.length) {
+      console.log(3);
+      setSendStatus("Bet not intered");
+      clearStatus();
+    }
 
-		console.log(result);
-	};
+    console.log(result);
+  };
 
-	const checkDuplicate = () => {
-		if (!listType) {
-			return [];
-		}
+  const checkDuplicate = () => {
+    if (!listType) {
+      return [];
+    }
 
-		const duplicateArray = [];
+    const duplicateArray = [];
 
-		list.forEach((obj) => {
-			for (const iterator of list) {
-				if (iterator.matchId === obj.matchId && iterator.id !== obj.id) {
-					duplicateArray.push(obj.id);
-				}
-			}
-		});
-		return duplicateArray;
-	};
+    list.forEach((obj) => {
+      for (const iterator of list) {
+        if (iterator.matchId === obj.matchId && iterator.id !== obj.id) {
+          duplicateArray.push(obj.id);
+        }
+      }
+    });
+    return duplicateArray;
+  };
 
-	return (
-		<div className="bet-slip">
-			<div className="bet-slip__head head">
-				<div className="head__wrapper">
-					<div className="head__switcher">
-						{switcherButtons.map((btn, i) => (
-							<button
-								className={"switcher__btn " + (listType === i ? "active" : "")}
-								onClick={() => dispatch(changeListType(i))}
-								key={i}
-							>
-								{btn}
-							</button>
-						))}
-					</div>
-					<button
-						className="head__close"
-						onClick={() => dispatch(clearBetSlipList())}
-					>
-						<svg className="medal" width="20" height="20">
-							<use href="./img/icons/sprite.svg#delete-bet-slip"></use>
-						</svg>
-					</button>
-				</div>
-				<div className="auto-accept">
-					<div className="auto-accept__btn">
-						<i className="btn__checked active"></i>
-						<span className="btn__description">Accept all odds changes</span>
-					</div>
-					<div className="auto-accept__info">
-						<svg className="medal" width="20" height="20">
-							<use href="./img/icons/sprite.svg#information-bet-slip"></use>
-						</svg>
-					</div>
-				</div>
-			</div>
+  return (
+    <div className="bet-slip">
+      <div className="bet-slip__head head">
+        <div className="head__wrapper">
+          <div className="head__switcher">
+            {switcherButtons.map((btn, i) => (
+              <button
+                className={"switcher__btn " + (listType === i ? "active" : "")}
+                onClick={() => dispatch(changeListType(i))}
+                key={i}
+              >
+                {btn}
+              </button>
+            ))}
+          </div>
+          <button
+            className="head__close"
+            onClick={() => dispatch(clearBetSlipList())}
+          >
+            <svg className="medal" width="20" height="20">
+              <use href="./img/icons/sprite.svg#delete-bet-slip"></use>
+            </svg>
+          </button>
+        </div>
+        <div className="auto-accept">
+          <div className="auto-accept__btn">
+            <i className="btn__checked active"></i>
+            <span className="btn__description">Accept all odds changes</span>
+          </div>
+          <div className="auto-accept__info">
+            <svg className="medal" width="20" height="20">
+              <use href="./img/icons/sprite.svg#information-bet-slip"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
 
-			<div className="bet-slip__content">
-				<Scrollbars
-					style={{ height: listHeight() + "px" }}
-					autoHide
-					autoHideTimeout={1000}
-					autoHideDuration={200}
-					renderThumbVertical={(props) => (
-						<div {...props} className="thumb-vertical" />
-					)}
-					renderView={(props) => <div {...props} className="view" />}
-				>
-					{list.map((item, index) => (
-						<BetSlipOdd
-							index={index}
-							data={item}
-							key={item.id}
-							listType={listType}
-							invalid={checkDuplicate().includes(item.id)}
-						/>
-					))}
-				</Scrollbars>
-				<div>{sendStatus}</div>
-				{!!listType && (
-					<>
-						<BetSlipOddCounter amount={amount} />
-						<BetSlipOddTotal amount={amount} multiplayer={multiplayer} />
-					</>
-				)}
-			</div>
+      <div className="bet-slip__content">
+        <Scrollbars
+          style={{ height: listHeight() + "px" }}
+          autoHide
+          autoHideTimeout={1000}
+          autoHideDuration={200}
+          renderThumbVertical={(props) => (
+            <div {...props} className="thumb-vertical" />
+          )}
+          renderView={(props) => <div {...props} className="view" />}
+        >
+          {list.map((item, index) => (
+            <BetSlipOdd
+              index={index}
+              data={item}
+              key={item.id}
+              listType={listType}
+              invalid={checkDuplicate().includes(item.id)}
+            />
+          ))}
+        </Scrollbars>
+        <div>{sendStatus}</div>
+        {!!listType && (
+          <>
+            <BetSlipOddCounter amount={amount} />
+            <BetSlipOddTotal amount={amount} multiplayer={multiplayer} />
+          </>
+        )}
+      </div>
 
-			<div className="bet-slip__footer">
-				{user.status ? (
-					<button onClick={() => sendBetSlip()} className="button">
-						Make a bet
-					</button>
-				) : (
-					<button className="button">Login</button>
-				)}
-			</div>
-		</div>
-	);
+      <div className="bet-slip__footer">
+        {user.status ? (
+          <button onClick={() => sendBetSlip()} className="button">
+            Make a bet
+          </button>
+        ) : (
+          <button className="button">Login</button>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default BetSlip;
