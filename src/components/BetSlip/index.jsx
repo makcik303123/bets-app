@@ -14,7 +14,7 @@ import {
 	unloadBetSlipList,
 	removeBetSlip,
 } from "../../redux/slices/betSlipListSlice";
-import validateBalance from "../../hooks/validateBalance";
+import validateBalance from "../../utils/helpers/validateBalance";
 import { arrayUnion, increment } from "firebase/firestore";
 
 function BetSlip() {

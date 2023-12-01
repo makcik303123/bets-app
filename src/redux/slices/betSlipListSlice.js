@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actionAmount from "../../hooks/actionAmount";
+import actionAmount from "../../utils/helpers/actionAmount";
 
 const initialState = {
 	list: [],

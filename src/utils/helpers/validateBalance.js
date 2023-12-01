@@ -1,4 +1,4 @@
-import { arrayValues } from "../variablres/variables";
+import { arrayValues } from "../constants/variables";
 
 const validateBalance = (list, balance, activeValue) => {
 	console.log(balance, "balance");
