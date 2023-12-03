@@ -15,7 +15,7 @@ import {
   removeBetSlip,
 } from "../../redux/slices/betSlipListSlice";
 import validateBalance from "../../utils/helpers/validateBalance";
-import { arrayUnion, increment } from "firebase/firestore";
+import { increment } from "firebase/firestore";
 
 function BetSlip() {
   const [sendStatus, setSendStatus] = useState(null);
@@ -77,22 +77,16 @@ function BetSlip() {
 
   const sendBetSlip = () => {
     const { balance, activeValue, historyBetsList } = user;
-
     const result = validateBalance(list, balance, activeValue);
-
     const { emptyArray, remainderArray, successfulArray, spendMoney } = result;
-
     const clearStatus = () => {
       setTimeout(() => setSendStatus(null), 5000);
     };
 
     if (successfulArray.length) {
-      console.log(1);
       setSendStatus("Bet confirm!");
       successfulArray.forEach((el) => dispatch(removeBetSlip(el.id)));
-      console.log(spendMoney);
       clearStatus();
-      console.log(arrayUnion);
       updateUserData(uid, {
         historyBetsList: {
           active: [...historyBetsList.active, ...successfulArray],
@@ -103,12 +97,10 @@ function BetSlip() {
     }
 
     if (remainderArray.length) {
-      console.log(2);
       setSendStatus("You dont have money!");
       clearStatus();
     }
     if (emptyArray.length) {
-      console.log(3);
       setSendStatus("Bet not intered");
       clearStatus();
     }
