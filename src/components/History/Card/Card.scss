@@ -1,0 +1,79 @@
+.history-card {
+	background: var(--bg-block-in-block);
+	margin-bottom: 8px;
+	position: relative;
+	transform-style: preserve-3d;
+	width: 100%;
+	border-radius: 6px;
+
+	.history-card__event {
+		display: flex;
+		flex-direction: column;
+		padding: 10px;
+
+		.event__tableStake {
+			display: flex;
+			justify-content: space-between;
+			font-size: 14px;
+			color: var(--text-dark-color-100);
+
+			&:nth-child(1) {
+				margin-bottom: 5px;
+
+				.value {
+					color: var(--text-color-100);
+				}
+				.label {
+					color: var(--text-color-90);
+				}
+			}
+
+			.value {
+				font-weight: 700;
+			}
+		}
+	}
+
+	.history-card__result {
+		border-top: 1px solid rgba(255, 255, 255, 0.03);
+		background: var(--bg-block-in-block);
+		box-shadow: 0 1px 0 1px inset #12171d;
+		padding: 10px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-radius: 0 0 6px 6px;
+
+		.result__status {
+			font-weight: 700;
+			font-size: 12px;
+
+			&.status-loss {
+				color: var(--primary-danger-color-100);
+			}
+			&.status-win {
+				color: var(--primary-loot-color-100);
+			}
+		}
+		.result__details {
+			font-size: 12px;
+			text-transform: uppercase;
+			color: var(--primary-loot-color-100);
+			position: relative;
+			padding-right: 20px;
+			cursor: pointer;
+
+			&::after {
+				content: "";
+				position: absolute;
+				right: 0;
+				top: calc(50% - 7px);
+				transform: rotate(315deg) translate(-50%);
+				border: solid var(--primary-loot-color-100);
+				border-width: 0 2px 2px 0;
+				display: inline-block;
+				padding: 3px;
+			}
+		}
+	}
+}
