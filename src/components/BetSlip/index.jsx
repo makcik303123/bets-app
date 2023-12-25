@@ -56,8 +56,8 @@ function BetSlip() {
             <use href="./img/icons/sprite.svg#no-bets-img"></use>
           </svg>
           <div className="no-bets__text">
-            <span class="no-bets__title">Купон пуст</span>
-            <span class="no-bets__message">
+            <span className="no-bets__title">Купон пуст</span>
+            <span className="no-bets__message">
               Чтобы сделать ставку, выберите событие
             </span>
           </div>
@@ -99,6 +99,7 @@ function BetSlip() {
     if (remainderArray.length) {
       setSendStatus("You dont have money!");
       clearStatus();
+      return;
     }
     if (emptyArray.length) {
       setSendStatus("Bet not intered");
