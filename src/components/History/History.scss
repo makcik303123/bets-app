@@ -1,9 +1,7 @@
 .history {
   .history__list {
-    padding: 12px;
     display: flex;
     flex-direction: column;
-    height: 400px;
   }
 
   .history__filter {
@@ -55,5 +53,13 @@
         }
       }
     }
+  }
+
+  .thumb-vertical {
+    padding: 10px 0;
+  }
+
+  .view {
+    padding: 12px;
   }
 }
