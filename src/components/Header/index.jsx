@@ -5,9 +5,9 @@ import "./header.scss";
 import Login from "../Login";
 import { Link } from "react-router-dom";
 import SignUp from "../SignUp";
+import { arrayLinks, arrayValues } from "../../utils/constants/variables";
 
 import { changeUserData } from "../../redux/slices/userSlice";
-// import { changeActiveValue } from "../../redux/slices/activeValueSlice";
 import { changeAuthUid } from "../../redux/slices/authUidSlice";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -15,7 +15,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { auth, updateUserData, usersRef } from "../../firebase";
 
 function Header() {
-	// const activeValue = useSelector((state) => state.activeValueRducer.value);
 	const user = useSelector((state) => state.getUserDataReducer.data);
 	const authUid = useSelector((state) => state.authUidReducer.value);
 	const dispatch = useDispatch();
@@ -61,22 +60,6 @@ function Header() {
 
 		updateUserData(authUid, { activeValue: index });
 	};
-
-	const arrayLinks = [
-		"bets",
-		"pro",
-		"games",
-		"streamers",
-		"ladder",
-		"promo",
-		"news",
-	];
-
-	const arrayValues = [
-		{ value: "USD", multiplayer: 1.1 },
-		{ value: "RUB", multiplayer: 100 },
-		{ value: "EUR", multiplayer: 1 },
-	];
 
 	const [activeLink, setActiveLink] = React.useState(0);
 	const [selectValue, setSelectValue] = React.useState(false);

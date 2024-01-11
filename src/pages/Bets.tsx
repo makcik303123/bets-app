@@ -5,7 +5,7 @@ import Panel from "../components/Panel";
 import Helper from "../components/Helper";
 
 function Bets() {
-	const [dataGames, setDataGames] = React.useState([]);
+	const [dataGames, setDataGames] = React.useState<Object[]>([]);
 	const [activeVideoGame, setActiveVideoGame] = React.useState(0);
 	const [isLoading, setIsLoading] = React.useState(true);
 
@@ -23,7 +23,7 @@ function Bets() {
 		["MORE", "GAMES"],
 	];
 
-	const filter =
+	const filter: string =
 		typeof arrVideoGames[activeVideoGame] === "string"
 			? "?filter[videogame]=" + arrVideoGames[activeVideoGame]
 			: "";
