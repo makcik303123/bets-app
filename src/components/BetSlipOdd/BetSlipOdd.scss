@@ -5,6 +5,10 @@
 	transition: box-shadow 0.3s;
 	position: relative;
 
+	&.invalid {
+		box-shadow: 0 0 0 1px #9e0000 inset;
+	}
+
 	.bet__delete {
 		position: absolute;
 		top: 6px;
@@ -18,7 +22,7 @@
 		.information__header {
 			display: flex;
 			padding: 12px 26px 8px 12px;
-			font-size: 16px;
+			font-size: 14px;
 			line-height: 16px;
 			font-weight: 700;
 			position: relative;

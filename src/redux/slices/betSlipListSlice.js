@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import actionAmount from "../../hooks/actionAmount";
+import actionAmount from "../../utils/helpers/actionAmount";
 
 const initialState = {
 	list: [],
@@ -21,18 +21,15 @@ export const betSlipListSlice = createSlice({
 			} else {
 				state.list.push(action.payload);
 			}
-
-			// if (list.listType) {
-			// 	list.forEach(bet => {
-			// 		bet.
-			// 	});
-			// }
 		},
 		removeBetSlip(state, action) {
 			state.list = state.list.filter((obj) => obj.id !== action.payload);
 		},
 		clearBetSlipList(state) {
 			state.list = [];
+		},
+		unloadBetSlipList(state, action) {
+			state.list = action.payload;
 		},
 
 		handlerAmount(state, action) {
@@ -57,6 +54,7 @@ export const {
 	clearBetSlipList,
 	changeListType,
 	handlerAmount,
+	unloadBetSlipList,
 } = betSlipListSlice.actions;
 
 export default betSlipListSlice.reducer;

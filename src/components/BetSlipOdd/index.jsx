@@ -7,7 +7,7 @@ import { removeBetSlip } from "../../redux/slices/betSlipListSlice";
 import BetSlipOddCounter from "./BetSlipOddCounter";
 import BetSlipOddTotal from "./BetSlipOddTotal";
 
-function BetSlipOdd({ data, listType, index }) {
+function BetSlipOdd({ data, listType, index, invalid }) {
 	const {
 		id,
 		matchId,
@@ -18,11 +18,11 @@ function BetSlipOdd({ data, listType, index }) {
 		multiplayer,
 		amount,
 	} = data;
-	const [duplicate, setDuplicate] = React.useState(0);
+
 	const dispatch = useDispatch();
 
 	return (
-		<div className="content__bet">
+		<div className={"content__bet" + (invalid ? " invalid" : "")}>
 			<div className="bet__delete" onClick={() => dispatch(removeBetSlip(id))}>
 				<svg width={20} height={20}>
 					<use href="./img/icons/sprite.svg#delete-bet-slip"></use>
