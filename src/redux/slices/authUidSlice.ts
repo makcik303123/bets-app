@@ -1,14 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface AuthUidState {
+	value: number | undefined;
+}
 
 const initialState = {
 	value: undefined,
-};
+} as AuthUidState;
 
 export const authUidSlice = createSlice({
 	name: "authUid",
 	initialState,
 	reducers: {
-		changeAuthUid(state, action) {
+		changeAuthUid(state, action: PayloadAction<number | undefined>) {
 			state.value = action.payload;
 		},
 	},
@@ -16,7 +20,5 @@ export const authUidSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { changeAuthUid } = authUidSlice.actions;
-
-export const selectAuthUid = (state) => state.authUid.value;
 
 export default authUidSlice.reducer;

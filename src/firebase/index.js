@@ -39,6 +39,4 @@ async function updateUserData(uid, obj) {
 	await updateDoc(doc(usersRef, uid), obj);
 }
 
-// updateUserData("NQy531wdPgXkgN2syNnscz1elea2");
-
 export { addUserInDatabase, auth, usersRef, updateUserData };

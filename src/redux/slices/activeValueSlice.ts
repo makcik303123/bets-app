@@ -1,6 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface ValueState {
+	value: number;
+}
+
+const initialState: ValueState = {
 	value: 0,
 };
 
@@ -8,7 +12,7 @@ export const activeValueSlice = createSlice({
 	name: "activeValue",
 	initialState,
 	reducers: {
-		changeActiveValue(state, action) {
+		changeActiveValue(state, action: PayloadAction<number>) {
 			state.value = action.payload;
 		},
 	},
