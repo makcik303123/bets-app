@@ -2,9 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actionAmount from "../../utils/helpers/actionAmount";
 // import { RootState } from "../store";
 
+enum BetSlipListType {
+	Single,
+	Multi,
+}
+
 interface BetSlipListState {
 	list: object[];
-	listType: number;
+	listType: BetSlipListType;
 	amount: number;
 }
 

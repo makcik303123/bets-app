@@ -1,11 +1,10 @@
 import React from "react";
 import "./BetSlipOddCounter.scss";
 
-import { useDispatch } from "react-redux";
-import { handlerAmount } from "../../../redux/slices/betSlipListSlice";
+import { useActions } from "../../../hooks";
 
 function BetSlipOddCounter({ amount, index = null }) {
-	const dispatch = useDispatch();
+	const { handlerAmount } = useActions();
 
 	const eventHandler = (e) => {
 		console.log(e);
@@ -16,9 +15,7 @@ function BetSlipOddCounter({ amount, index = null }) {
 			<div className="counter__wrapper">
 				<button
 					className="counter__button"
-					onClick={() =>
-						dispatch(handlerAmount({ type: "decrement", index, amount }))
-					}
+					onClick={() => handlerAmount({ type: "decrement", index, amount })}
 				>
 					<svg width={20} height={20}>
 						<use href="./img/icons/sprite.svg#minus-bet-slip"></use>
@@ -30,16 +27,12 @@ function BetSlipOddCounter({ amount, index = null }) {
 					type="text"
 					value={amount || ""}
 					onChange={(e) =>
-						dispatch(
-							handlerAmount({ type: "input", index, amount: e.target.value })
-						)
+						handlerAmount({ type: "input", index, amount: e.target.value })
 					}
 				/>
 				<button
 					className="counter__button"
-					onClick={() =>
-						dispatch(handlerAmount({ type: "increment", index, amount }))
-					}
+					onClick={() => handlerAmount({ type: "increment", index, amount })}
 				>
 					<svg width={20} height={20}>
 						<use href="./img/icons/sprite.svg#plus-bet-slip"></use>

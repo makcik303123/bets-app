@@ -1,9 +1,8 @@
 import React from "react";
 import "./BetSlipOdd.scss";
 
-import { useDispatch } from "react-redux";
+import { useActions } from "../../hooks";
 
-import { removeBetSlip } from "../../redux/slices/betSlipListSlice";
 import BetSlipOddCounter from "./BetSlipOddCounter";
 import BetSlipOddTotal from "./BetSlipOddTotal";
 
@@ -19,11 +18,11 @@ function BetSlipOdd({ data, listType, index, invalid }) {
 		amount,
 	} = data;
 
-	const dispatch = useDispatch();
+	const { removeBetSlip } = useActions();
 
 	return (
 		<div className={"content__bet" + (invalid ? " invalid" : "")}>
-			<div className="bet__delete" onClick={() => dispatch(removeBetSlip(id))}>
+			<div className="bet__delete" onClick={() => removeBetSlip(id)}>
 				<svg width={20} height={20}>
 					<use href="./img/icons/sprite.svg#delete-bet-slip"></use>
 				</svg>

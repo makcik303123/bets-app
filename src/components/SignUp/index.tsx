@@ -1,6 +1,5 @@
 import React from "react";
 import "./login.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addUserInDatabase } from "../../firebase";
@@ -8,7 +7,6 @@ import { addUserInDatabase } from "../../firebase";
 import type { SignUpProps } from "./SignUp.type";
 
 const SignUp = ({ popupSignUp, setPopupSignUp }: SignUpProps) => {
-	const dispatch = useDispatch();
 	const [inputEmail, setInputEmail] = React.useState("");
 	const [inputPassword, setinptPassword] = React.useState("");
 

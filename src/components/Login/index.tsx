@@ -1,13 +1,11 @@
 import React from "react";
 import "./login.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import type { LoginProps } from "./Login.type";
 
 const Login = ({ popupLogin, setPopupLogin }: LoginProps) => {
-	const dispatch = useDispatch();
 	const [inputEmail, setInputEmail] = React.useState("");
 	const [inputPassword, setinptPassword] = React.useState("");
 

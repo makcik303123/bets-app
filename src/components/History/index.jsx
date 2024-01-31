@@ -2,13 +2,13 @@ import { useState } from "react";
 import "./History.scss";
 import Card from "./Card";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { useSelector, useDispatch } from "react-redux";
+import { useTypedSelector } from "../../hooks";
 
 function History() {
 	const [active, setActive] = useState(0);
 
-	const user = useSelector((state) => state.getUserDataReducer.data);
-	const { historyBetsList } = useSelector(
+	const user = useTypedSelector((state) => state.getUserDataReducer.data);
+	const { historyBetsList } = useTypedSelector(
 		(state) => state.getUserDataReducer.data
 	);
 

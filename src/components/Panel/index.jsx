@@ -2,11 +2,10 @@ import React from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import Game from "../Game";
 import "./Panel.scss";
-
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../hooks";
 
 function Panel({ dataGames, isLoading }) {
-	const list = useSelector((state) => state.betSlipListReducer.list);
+	const list = useTypedSelector((state) => state.betSlipListReducer.list);
 
 	return (
 		<div className="table-container container">

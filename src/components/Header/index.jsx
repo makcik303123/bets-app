@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useActions, useTypedSelector } from "../../hooks";
 
 import "./header.scss";
 import Login from "../Login";
@@ -7,26 +7,23 @@ import { Link } from "react-router-dom";
 import SignUp from "../SignUp";
 import { arrayLinks, arrayValues } from "../../utils/constants/variables";
 
-import { changeUserData } from "../../redux/slices/userSlice";
-import { changeAuthUid } from "../../redux/slices/authUidSlice";
-
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { auth, updateUserData, usersRef } from "../../firebase";
 
 function Header() {
-	const user = useSelector((state) => state.getUserDataReducer.data);
-	const authUid = useSelector((state) => state.authUidReducer.value);
-	const dispatch = useDispatch();
+	const user = useTypedSelector((state) => state.getUserDataReducer.data);
+	const authUid = useTypedSelector((state) => state.authUidReducer.value);
+	const { changeAuthUid, changeUserData } = useActions();
 	const selectRef = React.useRef();
 
 	React.useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				const uid = user.uid;
-				dispatch(changeAuthUid(uid));
+				changeAuthUid(uid);
 			} else {
-				dispatch(changeAuthUid(undefined));
+				changeAuthUid(undefined);
 			}
 		});
 	}, []);
@@ -34,19 +31,19 @@ function Header() {
 	React.useEffect(() => {
 		if (authUid) {
 			const unsub = onSnapshot(doc(usersRef, authUid), (doc) => {
-				dispatch(changeUserData(doc.data()));
+				changeUserData(doc.data());
 				console.log("Current data: ", doc.data());
 			});
 			return unsub;
 		} else {
-			dispatch(changeUserData(false));
+			changeUserData(false);
 		}
 	}, [authUid]);
 
 	const signOutFromAccount = () => {
 		signOut(auth)
 			.then(() => {
-				dispatch(changeUserData(false));
+				changeUserData(false);
 			})
 			.catch((error) => {
 				console.log(error);
