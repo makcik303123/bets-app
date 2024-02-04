@@ -1,21 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DocumentData } from "firebase/firestore";
+import type { User } from "../../types/User.type";
 
 interface UserState {
-	data: object | false;
+  data: DocumentData | undefined;
 }
 
 const initialState: UserState = {
-	data: false,
+  data: undefined,
 };
 
 export const userSlice = createSlice({
-	name: "user",
-	initialState,
-	reducers: {
-		changeUserData(state, action: PayloadAction<object | false>) {
-			state.data = action.payload;
-		},
-	},
+  name: "user",
+  initialState,
+  reducers: {
+    changeUserData(state, action: PayloadAction<DocumentData | undefined>) {
+      state.data = action.payload;
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function

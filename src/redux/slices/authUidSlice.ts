@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthUidState {
-	value: number | undefined;
+  value: string | undefined;
 }
 
 const initialState = {
-	value: undefined,
+  value: undefined,
 } as AuthUidState;
 
 export const authUidSlice = createSlice({
-	name: "authUid",
-	initialState,
-	reducers: {
-		changeAuthUid(state, action: PayloadAction<number | undefined>) {
-			state.value = action.payload;
-		},
-	},
+  name: "authUid",
+  initialState,
+  reducers: {
+    changeAuthUid(state, action: PayloadAction<string | undefined>) {
+      state.value = action.payload;
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function

@@ -1,7 +1,26 @@
 import React from "react";
 import "./GameBar.scss";
 
-const GameBar = ({ activeVideoGame, setActiveVideoGame, arrVideoGames }) => {
+const arrVideoGames = [
+  ["ALL", "GAMES"],
+  "cs-go",
+  "dota-2",
+  "league-of-legends",
+  "lol-wild-rift",
+  "r6-siege",
+  "ow",
+  "starcraft-2",
+  "rl",
+  "call",
+  ["MORE", "GAMES"],
+];
+
+type GameBarProps = {
+  activeVideoGame: number;
+  setActiveVideoGame: (i: number) => void;
+};
+
+const GameBar = ({ activeVideoGame, setActiveVideoGame }: GameBarProps) => {
   return (
     <div className="game-bar container">
       {arrVideoGames.map((videoGame, i) => (

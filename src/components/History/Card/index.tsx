@@ -1,8 +1,13 @@
 import React from "react";
 import "./Card.scss";
+import type { ActiveBets } from "../../../types/User.type";
 
-function Card({ data }) {
-  console.log(data);
+type CardProps = {
+  data: ActiveBets;
+};
+
+function Card({ data }: CardProps) {
+  console.log(data, " card");
 
   return (
     <div className="history-card">
