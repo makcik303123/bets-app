@@ -5,6 +5,28 @@ import { apiKey } from "../api/api";
 function News() {
 	const [news, setNews] = React.useState([]);
 
+	// const options = {
+	// 	method: "GET",
+	// 	url: "https://esports-news.p.rapidapi.com/news",
+	// 	headers: {
+	// 		"X-RapidAPI-Key": "0670c7e302mshfaa63a8e4756220p16548djsn7fc7708c61d3",
+	// 		"X-RapidAPI-Host": "esports-news.p.rapidapi.com",
+	// 	},
+	// };
+
+	// React.useEffect(() => {
+	// 	async function fetchDataNews() {
+	// 		try {
+	// 			const response = await axios.request(options);
+	// 			console.log(response.data);
+	// 			// setNews(response)
+	// 		} catch (error) {
+	// 			console.error(error);
+	// 		}
+	// 	}
+	// 	fetchDataNews();
+	// }, []);
+
 	React.useEffect(() => {
 		async function fetchDataNews() {
 			try {
@@ -20,6 +42,7 @@ function News() {
 	}, []);
 
 	console.log(news);
+
 	const tags: string[] = [
 		"all news",
 		"dota 2",
@@ -55,98 +78,28 @@ function News() {
 			</div>
 			<div className="news-content-container">
 				<div className="news-content">
-					<div className="content-block-wrapper">
-						<div className="content-block">
-							<div className="block-img">
-								<img src="img/img-news.jpg" alt="img-news" />
-							</div>
-							<div className="block-info">
-								<div className="info-title">
-									<div className="title-selectable">
-										Как играть за Timbersow: Гайд по Dota 2
+					{news.map((item: any, i) => (
+						<div key={i} className="content-block-wrapper">
+							<div className="content-block">
+								<div className="block-img">
+									<img src={item.image_url} alt="img-news" />
+								</div>
+
+								<div className="block-info">
+									<div className="info-title">
+										<div className="title-selectable">{item.title}</div>
+										<div className="title-preview">{item.description}</div>
 									</div>
-									<div className="title-preview">
-										Гайд по герою Timbersow в Dota 2
+									<div className="info-footer">
+										<div className="info-data">21 марта 2023 года</div>
 									</div>
-								</div>
-								<div className="info-footer">
-									<div className="info-data">21 марта 2023 года</div>
-								</div>
-								<div className="block-logo-game">
-									<img src="img/dota2-news.png" alt="dota2-news" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="content-block-wrapper">
-						<div className="content-block">
-							<div className="block-img">
-								<img src="img/img-news.jpg" alt="img-news" />
-							</div>
-							<div className="block-info">
-								<div className="info-title">
-									<div className="title-selectable">
-										Как играть за Timbersow: Гайд по Dota 2
+									<div className="block-logo-game">
+										<img src="img/dota2-news.png" alt="dota2-news" />
 									</div>
-									<div className="title-preview">
-										Гайд по герою Timbersow в Dota 2
-									</div>
-								</div>
-								<div className="info-footer">
-									<div className="info-data">21 марта 2023 года</div>
-								</div>
-								<div className="block-logo-game">
-									<img src="img/dota2-news.png" alt="dota2-news" />
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className="content-block-wrapper">
-						<div className="content-block">
-							<div className="block-img">
-								<img src="img/img-news.jpg" alt="img-news" />
-							</div>
-							<div className="block-info">
-								<div className="info-title">
-									<div className="title-selectable">
-										Как играть за Timbersow: Гайд по Dota 2
-									</div>
-									<div className="title-preview">
-										Гайд по герою Timbersow в Dota 2
-									</div>
-								</div>
-								<div className="info-footer">
-									<div className="info-data">21 марта 2023 года</div>
-								</div>
-								<div className="block-logo-game">
-									<img src="img/dota2-news.png" alt="dota2-news" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="content-block-wrapper">
-						<div className="content-block">
-							<div className="block-img">
-								<img src="img/img-news.jpg" alt="img-news" />
-							</div>
-							<div className="block-info">
-								<div className="info-title">
-									<div className="title-selectable">
-										Как играть за Timbersow: Гайд по Dota 2
-									</div>
-									<div className="title-preview">
-										Гайд по герою Timbersow в Dota 2
-									</div>
-								</div>
-								<div className="info-footer">
-									<div className="info-data">21 марта 2023 года</div>
-								</div>
-								<div className="block-logo-game">
-									<img src="img/dota2-news.png" alt="dota2-news" />
-								</div>
-							</div>
-						</div>
-					</div>
+					))}
 				</div>
 			</div>
 		</div>
