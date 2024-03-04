@@ -50,7 +50,7 @@ function Bets() {
     fetchData();
   }, [filter]);
 
-  console.log(dataGames);
+  // console.log(dataGames);
 
   return (
     <div className="grid">

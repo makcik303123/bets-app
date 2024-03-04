@@ -10,7 +10,7 @@ function History() {
   const user = useTypedSelector((state) => state.getUserDataReducer.data);
 
   if (!user) {
-    return;
+    return null;
   }
 
   const { historyBetsList } = user;

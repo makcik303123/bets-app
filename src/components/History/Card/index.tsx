@@ -7,8 +7,6 @@ type CardProps = {
 };
 
 function Card({ data }: CardProps) {
-  console.log(data, " card");
-
   return (
     <div className="history-card">
       <div className="history-card__event">

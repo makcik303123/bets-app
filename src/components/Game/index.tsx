@@ -10,9 +10,6 @@ type GameProps = {
 };
 
 function Game({ dataGame, list }: GameProps) {
-  console.log(dataGame);
-  console.log(list);
-
   const multiplayer = 1.85;
   const { status } = dataGame;
 
@@ -37,6 +34,8 @@ function Game({ dataGame, list }: GameProps) {
       gameFinished: false,
       betWin: null,
     };
+    console.log("click");
+
     clickOnMultiplayer(betSlipData);
   }
 

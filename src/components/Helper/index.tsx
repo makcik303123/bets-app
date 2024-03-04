@@ -3,10 +3,20 @@ import BetSlip from "../BetSlip";
 
 import "./Helper.scss";
 import History from "../History";
+import Quest from "../Quest";
+import { useTypedSelector } from "../../hooks";
 
 function Helper() {
   const buttons = ["betslip", "history", "quest"];
   const [activeButton, setActiveButton] = React.useState(0);
+
+  // const list = useTypedSelector((state) => state.betSlipListReducer.list);
+
+  // React.useEffect(() => {
+  //   if (!list.length) {
+  //     setActiveButton(2);
+  //   }
+  // }, []);
 
   return (
     <div className="helper">
@@ -31,7 +41,7 @@ function Helper() {
             case 1:
               return <History />;
             case 2:
-              return null;
+              return <Quest />;
             default:
               return null;
           }

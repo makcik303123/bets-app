@@ -16,7 +16,7 @@ interface BetSlipListState {
 
 const initialState: BetSlipListState = {
   list: [],
-  listType: 0 | 1,
+  listType: 0,
   amount: 0,
 };
 
