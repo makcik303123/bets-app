@@ -1,0 +1,38 @@
+.nav__left {
+  margin-left: 20px;
+  display: flex;
+
+  .nav__item {
+    display: flex;
+
+    .link {
+      color: #ebeaea;
+      font-family: Segoe UI;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: uppercase;
+      padding: 19px 23.52px 20px 20px;
+      transition: 0.4s;
+
+      &.active {
+        color: #00d487;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 212, 135, 0.25) 0%,
+          rgba(14, 122, 108, 0) 50%
+        );
+        box-shadow: 0px -2px 0px 0px #03a36c inset;
+      }
+      &:hover {
+        color: #00d487;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 212, 135, 0.25) 0%,
+          rgba(14, 122, 108, 0) 50%
+        );
+        box-shadow: 0px -2px 0px 0px #03a36c inset;
+      }
+    }
+  }
+}

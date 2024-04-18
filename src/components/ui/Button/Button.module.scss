@@ -1,0 +1,18 @@
+.button {
+  color: rgb(255 255 255 / 90%);
+  font-family: Segoe UI;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(to top, #0d966e 0%, #09b177 100%);
+  padding: 9px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    box-shadow: 0 0 4px #00d487, inset 0 0 3px 1px #00d487;
+    color: #fff;
+    background: linear-gradient(180deg, #0ec184 0%, #0ba072 100%);
+  }
+}

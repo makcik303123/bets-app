@@ -3,36 +3,32 @@ import "./BetSlip.scss";
 import BetSlipOdd from "../BetSlipOdd";
 import BetSlipOddCounter from "../BetSlipOdd/BetSlipOddCounter";
 import BetSlipOddTotal from "../BetSlipOdd/BetSlipOddTotal";
+import { Button } from "../ui/";
 import { updateUserData } from "../../firebase";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { useSelector, useDispatch } from "react-redux";
+import { useActions, useTypedSelector } from "../../hooks";
 
-import {
-  clearBetSlipList,
-  changeListType,
-  unloadBetSlipList,
-  removeBetSlip,
-} from "../../redux/slices/betSlipListSlice";
 import validateBalance from "../../utils/helpers/validateBalance";
 import { increment } from "firebase/firestore";
 
 function BetSlip() {
   const [sendStatus, setSendStatus] = useState(null);
 
-  const user = useSelector((state) => state.getUserDataReducer.data);
-  const uid = useSelector((state) => state.authUidReducer.value);
-  const { list, listType, amount } = useSelector(
+  const user = useTypedSelector((state) => state.getUserDataReducer.data);
+  const uid = useTypedSelector((state) => state.authUidReducer.value);
+  const { list, listType, amount } = useTypedSelector(
     (state) => state.betSlipListReducer
   );
-  const dispatch = useDispatch();
+  const { unloadBetSlipList, clearBetSlipList, changeListType, removeBetSlip } =
+    useActions();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (user.BetSlipList) {
-        dispatch(unloadBetSlipList(user.BetSlipList));
+      if (user?.BetSlipList) {
+        unloadBetSlipList(user.BetSlipList);
       } else {
-        dispatch(clearBetSlipList());
+        clearBetSlipList();
       }
     };
 
@@ -69,7 +65,7 @@ function BetSlip() {
   const switcherButtons = ["single", `multi(${list.length})`];
 
   const listHeight = () => {
-    const betHeight = !!listType ? 90 : 195;
+    const betHeight = !!listType ? 96 : 195;
     return list.length > 3 ? 3 * betHeight : list.length * betHeight;
   };
 
@@ -85,7 +81,7 @@ function BetSlip() {
 
     if (successfulArray.length) {
       setSendStatus("Bet confirm!");
-      successfulArray.forEach((el) => dispatch(removeBetSlip(el.id)));
+      successfulArray.forEach((el) => removeBetSlip(el.id));
       clearStatus();
       updateUserData(uid, {
         historyBetsList: {
@@ -134,17 +130,14 @@ function BetSlip() {
             {switcherButtons.map((btn, i) => (
               <button
                 className={"switcher__btn " + (listType === i ? "active" : "")}
-                onClick={() => dispatch(changeListType(i))}
+                onClick={() => changeListType(i)}
                 key={i}
               >
                 {btn}
               </button>
             ))}
           </div>
-          <button
-            className="head__close"
-            onClick={() => dispatch(clearBetSlipList())}
-          >
+          <button className="head__close" onClick={() => clearBetSlipList()}>
             <svg className="medal" width="20" height="20">
               <use href="./img/icons/sprite.svg#delete-bet-slip"></use>
             </svg>
@@ -195,11 +188,9 @@ function BetSlip() {
 
       <div className="bet-slip__footer">
         {user.status ? (
-          <button onClick={() => sendBetSlip()} className="button">
-            Make a bet
-          </button>
+          <Button onClick={() => sendBetSlip()}>Make a bet</Button>
         ) : (
-          <button className="button">Login</button>
+          <Button>Login</Button>
         )}
       </div>
     </div>
